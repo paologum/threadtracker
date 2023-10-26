@@ -1,0 +1,15 @@
+.title {
+  text-align: center;
+  width: 200px;
+  padding: 10px;
+  border: 1px solid black;
+  color: darkblue;
+  background-color: lightgreen;
+  margin: 20px;
+}
+
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
