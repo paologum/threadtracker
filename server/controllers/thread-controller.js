@@ -3,11 +3,11 @@
 const knex = require('./../db')
 
 // Retrieve all books
-exports.booksAll = async (req, res) => {
+exports.getAllBrands = async (req, res) => {
   // Get all books from database
   knex
     .select('*') // select all records
-    .from('books') // from 'books' table
+    .from('brands') // from 'books' table
     .then(userData => {
       // Send books extracted from database in response
       res.json(userData)
@@ -19,12 +19,12 @@ exports.booksAll = async (req, res) => {
 }
 
 // Create new book
-exports.booksCreate = async (req, res) => {
+exports.createBrand = async (req, res) => {
   // Add new book to database
   knex('books')
     .insert({ // insert new record, a book
-      'author': req.body.author,
-      'title': req.body.title,
+      'name': req.body.author,
+      '': req.body.title,
       'pubDate': req.body.pubDate,
       'rating': req.body.rating
     })

@@ -5,6 +5,13 @@ export type State =  {
 }
 
 export const state = observable<State>( {
-    brands: [],
+    brands: [{
+        brandID: 1,
+        name: 'Margiela',
+        creator: 'Martin Margiela',
+        startingDate: new Date('1973-1-1'),
+        luxury: true,
+        rating: 10
+    }],
 },
 )

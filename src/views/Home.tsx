@@ -1,12 +1,9 @@
 import './Home.css';
 import Button from '@mui/material/Button';
-import { fetcher } from '../util/actions';
 import { observer } from 'mobx-react' 
-import { state } from '../util/state'
 import { useContext } from 'react';
-import BrandList, { Brand } from '../BrandTable';   
-import { getBrands } from '../util/actions';
-import { context } from '../util';
+import BrandList from '../BrandTable';   
+import { context } from '../util/index';
 export const Home = observer (function () {
     const {state, actions} = useContext(context);
     return (
@@ -16,8 +13,6 @@ export const Home = observer (function () {
                 actions.getBrands();
                 }}>Get Table</Button>
             </div>
-            <div>
-                <BrandList brands= {state.brands}/>
-            </div>
+            <BrandList brands= {state.brands}/>
         </div>
     )});

@@ -1,10 +1,11 @@
 import React from 'react';
+import './BrandTable.css'
 
 export interface Brand {
   brandID: number;
   name: string;
-  startingDate: Date;
   creator: string;
+  startingDate: Date;
   luxury: boolean;
   rating: number;
   // Other properties...
@@ -15,22 +16,25 @@ interface BrandListProps {
 }
 
 const BrandList: React.FC<BrandListProps> = ({ brands }) => {
+    const keys = Object.keys(brands[0]);
   return (
     <div>
       <h1>Brand List</h1>
-      <ul>
-        {brands.map((brand) => (
-          <li key={brand.brandID}>
-            <strong>{brand.name}</strong> by {brand.creator}
-            <ul>
-              <li>Brand ID: {brand.brandID}</li>
-              <li>Starting Date: {brand.startingDate.toDateString()}</li>
-              <li>Luxury: {brand.luxury ? 'Yes' : 'No'}</li>
-              <li>Rating: {brand.rating}/10</li>
-            </ul>
-          </li>
+      <div className="grid-container">
+        {keys.map((props) => (
+        <p key={props}>{props}</p>
         ))}
-      </ul>
+        {brands.map((brand) => [
+            <React.Fragment key={brand.brandID}>
+                <div className="grid-item">{brand.brandID}</div>
+                <div className="grid-item">{brand.name}</div>
+                <div className="grid-item">{brand.creator}</div>
+                <div className="grid-item">{brand.startingDate.toLocaleDateString()}</div>
+                <div className="grid-item">{brand.luxury ? "Yes" : "No"}</div>
+                <div className="grid-item">{brand.rating}</div>
+            </React.Fragment>
+        ])}
+      </div>
     </div>
   );
 };

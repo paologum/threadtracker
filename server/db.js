@@ -28,8 +28,8 @@ knex.schema
         return knex.schema.createTable('brands', (table)  => {
           table.increments('brandID').primary()
           table.string('name')
-          table.date('startingDate')
           table.string('creator')
+          table.date('startingDate')
           table.boolean('luxury')
           table.integer('rating')
         })

@@ -1,0 +1,28 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(
+    6,
+    1fr
+  ); /* Adjust the number of columns as needed */
+  gap: 16px; /* Adjust the gap between grid items */
+  justify-content: flex;
+}
+.brand-item.header {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.grid-item {
+  border: 1px solid #ddd;
+  padding: 16px;
+  text-align: left;
+  justify-content: flex-start;
+}
+.grid-column {
+  /* Add styling for each column */
+  margin-right: 10px;
+}
+
+h1 {
+  text-align: center;
+}
