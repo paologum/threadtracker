@@ -17,7 +17,7 @@ const knex = require('knex')({
 knex.schema
   // Make sure no "books" table exists
   // before trying to create new
-  .hasTable('books')
+  .hasTable('brands')
     .then((exists) => {
       if (!exists) {
         // If no "books" table exists
@@ -25,16 +25,17 @@ knex.schema
         // "pubDate" and "rating" columns
         // and use "id" as a primary identification
         // and increment "id" with every new record (book)
-        return knex.schema.createTable('books', (table)  => {
-          table.increments('id').primary()
-          table.integer('author')
-          table.string('title')
-          table.string('pubDate')
+        return knex.schema.createTable('brands', (table)  => {
+          table.increments('brandID').primary()
+          table.string('name')
+          table.date('startingDate')
+          table.string('creator')
+          table.boolean('luxury')
           table.integer('rating')
         })
         .then(() => {
           // Log success message
-          console.log('Table \'Books\' created')
+          console.log('Table \'Brands\' created')
         })
         .catch((error) => {
           console.error(`There was an error creating table: ${error}`)
@@ -48,12 +49,43 @@ knex.schema
     .catch((error) => {
       console.error(`There was an error setting up the database: ${error}`)
     })
-
-// Just for debugging purposes:
-// Log all data in "books" table
-knex.select('*').from('books')
-  .then(data => console.log('data:', data))
-  .catch(err => console.log(err))
+knex.schema
+  // Make sure no "books" table exists
+  // before trying to create new
+  .hasTable('products')
+    .then((exists) => {
+      if (!exists) {
+        // If no "books" table exists
+        // create new, with "id", "author", "title",
+        // "pubDate" and "rating" columns
+        // and use "id" as a primary identification
+        // and increment "id" with every new record (book)
+        return knex.schema.createTable('products', (table)  => {
+          table.increments('productID').primary()
+          table.string('name')
+          table.integer('brandID')
+          table.integer('price')
+          table.date('releaseDate')
+          table.string('material')
+          table.string('category')
+          table.string('color')
+        })
+        .then(() => {
+          // Log success message
+          console.log('Table \'Products\' created')
+        })
+        .catch((error) => {
+          console.error(`There was an error creating table: ${error}`)
+        })
+      }
+    })
+    .then(() => {
+      // Log success message
+      console.log('done')
+    })
+    .catch((error) => {
+      console.error(`There was an error setting up the database: ${error}`)
+    })
 
 // Export the database
 module.exports = knex

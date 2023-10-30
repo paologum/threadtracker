@@ -2,7 +2,7 @@
 const express = require('express')
 
 // Import books-controller
-const booksRoutes = require('./../controllers/books-controller.js')
+const booksRoutes = require('./../controllers/thread-controller.js')
 
 // Create router
 const router = express.Router()
