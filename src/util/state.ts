@@ -1,5 +1,5 @@
 import { observable } from 'mobx'
-import { Brand } from '../BrandTable'
+import { Brand } from '../elements/BrandTable'
 export type State =  {
     brands: Brand[];
 }
