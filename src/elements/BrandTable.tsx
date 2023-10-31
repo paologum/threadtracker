@@ -28,14 +28,21 @@ const columns: GridColDef[] = [
 const BrandList: React.FC<BrandListProps> = ({ brands }) => {
     const keys = Object.keys(brands[0]);
     return (
-      <div style={{ height: 400, width: '100%' }}>
+      <div style={{ height: 400, width: '100%', color: 'light black' }}>
       <DataGrid
         rows={brands}
         columns={columns}
-        style={{
-          border: '1px solid black',
-          color: 'light black'
-        }}
+        sx={{
+          boxShadow: 2,
+          border: 2,
+          borderColor: 'primary.dark',
+          '& .MuiDataGrid-cell:hover': {
+            color: 'primary.main',
+        }}}
+        // style={{
+        //   border: '1px solid black',
+        //   color: 'light black'
+        // }}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 5 },

@@ -14,6 +14,8 @@
     "@mui/icons-material": "^5.14.15",
     "@mui/material": "^5.14.15",
     "@mui/x-data-grid": "^6.17.0",
+    "@mui/x-date-pickers": "^6.17.0",
+    "dayjs": "^1.11.10",
     "express": "^4.18.2",
     "knex": "^3.0.1",
     "mobx": "^6.10.2",
