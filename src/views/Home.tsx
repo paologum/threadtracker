@@ -4,7 +4,7 @@ import { observer } from 'mobx-react'
 import { useContext } from 'react';
 import BrandList from '../elements/BrandTable';   
 import { context } from '../util/index';
-import BrandTextInput, { brandTextInputState } from '../elements/TextInput'
+import BrandTextInput, { brandTextInputState } from '../elements/RowInput'
 export const Home = observer (function () {
     const {state, actions} = useContext(context);
     return (

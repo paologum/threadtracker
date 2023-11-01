@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Rating, Typography } from '@mui/material';
+import { Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Rating, Select, Typography } from '@mui/material';
 import { state } from '../util';
 import { action, makeObservable, observable } from 'mobx';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -16,7 +16,6 @@ class BrandTextInputState {
   startingDate = dayjs();
   luxury = false;
   rating = 5;
-  ratingText="5 stars";
 
   constructor() {
     makeObservable(this, {
@@ -25,7 +24,6 @@ class BrandTextInputState {
       startingDate: observable,
       luxury: observable,
       rating: observable,
-      ratingText: observable,
       setBrandName: action,
       setBrandCreator: action,
       setStartingDate: action,
@@ -65,7 +63,6 @@ const BrandTextInput: React.FC = observer(function () {
     startingDate,
     luxury,
     rating,
-    ratingText,
   } = brandTextInputState;
   return (
     <Box
@@ -102,34 +99,37 @@ const BrandTextInput: React.FC = observer(function () {
               helperText: 'MM/DD/YYYY',
             },
           }}
+          onChange={(newVal) => {
+            brandTextInputState.setStartingDate(newVal!);
+          }}
           label="Founded"/>
-        </LocalizationProvider>
-        <TextField
-          required
-          id="outlined-required"
-          label="Luxury"
-          helperText="Required"
-          defaultValue={luxury ? "Yes" : "No"}
-        />
-        <Typography component="legend">{ratingText}</Typography>
-        <Rating 
-          name="customized-10" 
-          defaultValue={0} 
-          value={rating}
-          sx={{
-            '& .MuiRating-iconFilled': {
-              color: '#19388A',
-            },
-            '& .MuiRating-iconHover': {
-              color: '#133AA3',
-            },
-          }}
-          max={10} 
-          precision={0.5}
-          onChange={(event, newVal) => {
-            brandTextInputState.setRating(newVal as number);
-          }}
-          />
+          </LocalizationProvider>
+        <div>
+          <FormControl sx={{width: '120', height: '100%', verticalAlign: 'middle', justifyContent: 'center', alignItems: 'center'}}>
+            <FormControlLabel control={<Checkbox defaultChecked value={luxury} onChange={(e) => {
+              brandTextInputState.setLuxury(e.target.checked)
+            }}/>} label="Luxury" />
+          </FormControl>
+          <Typography component="legend">{rating + " out of 10"}</Typography>
+          <Rating 
+            name="customized-10" 
+            defaultValue={0} 
+            value={rating}
+            sx={{
+              '& .MuiRating-iconFilled': {
+                color: '#19388A',
+              },
+              '& .MuiRating-iconHover': {
+                color: '#133AA3',
+              },
+            }}
+            max={10} 
+            precision={0.5}
+            onChange={(event, newVal) => {
+              brandTextInputState.setRating(newVal as number);
+            }}
+            />
+        </div>
       </div>
     </Box>
   );
