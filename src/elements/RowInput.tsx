@@ -94,6 +94,7 @@ const BrandTextInput: React.FC = observer(function () {
          <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker 
           value={startingDate}
+          views={['year']}
           slotProps={{
             textField: {
               helperText: 'MM/DD/YYYY',

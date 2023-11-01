@@ -4,6 +4,7 @@ const { BrandingWatermark, ContentPasteSearch } = require('@mui/icons-material')
 const { assertBrandType } = require('../types');
 const { Brand } = require('../../shared/types');
 const knex = require('./../db');
+const dayjs = require('dayjs');
 
 // Retrieve all books
 exports.getAllBrands = (req, res) => {
@@ -39,7 +40,7 @@ exports.createBrand = (req, res) => {
     .insert({ // insert new record, a book
       'name': contents.brandName,
       'creator': contents.brandCreator,
-      'startingDate': contents.startingDate,
+      'startingDate': dayjs(contents.startingDate).year(),
       'luxury': contents.luxury ? "true" : "false",
       'rating': contents.rating
     })
