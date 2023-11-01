@@ -44,6 +44,16 @@ export const getBrands = action("getBrands", async () => {
 export const setBrands = action("setBrands", (brands: Brand[]) => {
     state.brands = brands;
 })
+export const resetBrands = action("resetBrands", async () => {
+    try {
+        await fetcher('/router/reset',{
+            method: "PUT",
+        });
+        await getBrands();
+    } catch (error) {
+        console.log('Error resetting brands with error: ', error);
+    }
+})
 
 export const addBrands = action("addBrands", async(brand: BrandTextInputState) => {
     console.log(brand);

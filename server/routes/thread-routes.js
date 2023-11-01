@@ -25,7 +25,7 @@ router.post('/createBrand', brandRoutes.createBrand)
 // Add route for PUT request to reset bookshelf list
 // In server.js, books route is specified as '/books'
 // this means that '/reset' translates to '/books/reset'
-// router.put('/reset', booksRoutes.booksReset)
+router.put('/reset', brandRoutes.brandReset)
 
 // Export router
 module.exports = router

@@ -71,18 +71,18 @@ exports.booksDelete = async (req, res) => {
 }
 
 // Remove all books on the list
-exports.booksReset = async (req, res) => {
+exports.brandReset = async (req, res) => {
   // Remove all books from database
   knex
     .select('*') // select all records
-    .from('books') // from 'books' table
+    .from('brands') // from 'books' table
     .truncate() // remove the selection
     .then(() => {
       // Send a success message in response
-      res.json({ message: 'Book list cleared.' })
+      res.json({ message: 'Brands list cleared.' })
     })
     .catch(err => {
       // Send a error message in response
-      res.json({ message: `There was an error resetting book list: ${err}.` })
+      res.json({ message: `There was an error resetting brand list: ${err}.` })
     })
 }
