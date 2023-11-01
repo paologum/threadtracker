@@ -13,7 +13,7 @@ import dayjs, { Dayjs } from 'dayjs';
 export class BrandTextInputState {
   brandName = 'Brand';
   brandCreator = 'Creator';
-  startingDate = dayjs();
+  foundingYear = 2000;
   luxury = false;
   rating = 5;
 
@@ -21,12 +21,12 @@ export class BrandTextInputState {
     makeObservable(this, {
       brandName: observable,
       brandCreator: observable,
-      startingDate: observable,
+      foundingYear: observable,
       luxury: observable,
       rating: observable,
       setBrandName: action,
       setBrandCreator: action,
-      setStartingDate: action,
+      setFoundingYear: action,
       setLuxury: action,
       setRating: action,
     });
@@ -41,8 +41,8 @@ export class BrandTextInputState {
     this.brandCreator = value;
   }
 
-  setStartingDate(value: Dayjs) {
-    this.startingDate = value;
+  setFoundingYear(value: number) {
+    this.foundingYear = value;
   }
 
   setLuxury(value: boolean) {
@@ -60,7 +60,7 @@ const BrandTextInput: React.FC = observer(function () {
   const {
     brandName,
     brandCreator,
-    startingDate,
+    foundingYear,
     luxury,
     rating,
   } = brandTextInputState;
@@ -93,14 +93,15 @@ const BrandTextInput: React.FC = observer(function () {
         />
          <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker 
-          value={startingDate}
+          views={['year']}
+          value={foundingYear}
           slotProps={{
             textField: {
-              helperText: 'MM/DD/YYYY',
+              helperText: 'Required',
             },
           }}
           onChange={(newVal) => {
-            brandTextInputState.setStartingDate(newVal!);
+            brandTextInputState.setFoundingYear(newVal!);
           }}
           label="Founded"/>
           </LocalizationProvider>

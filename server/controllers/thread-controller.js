@@ -39,7 +39,7 @@ exports.createBrand = (req, res) => {
     .insert({ // insert new record, a book
       'name': contents.brandName,
       'creator': contents.brandCreator,
-      'startingDate': contents.startingDate,
+      'year': contents.foundingYear,
       'luxury': contents.luxury ? "true" : "false",
       'rating': contents.rating
     })
