@@ -106,7 +106,7 @@ const BrandTextInput: React.FC = observer(function () {
           </LocalizationProvider>
         <div>
           <FormControl sx={{width: '120', height: '100%', verticalAlign: 'middle', justifyContent: 'center', alignItems: 'center'}}>
-            <FormControlLabel control={<Checkbox defaultChecked value={luxury} onChange={(e) => {
+            <FormControlLabel control={<Checkbox value={luxury} onChange={(e) => {
               brandTextInputState.setLuxury(e.target.checked)
             }}/>} label="Luxury" />
           </FormControl>

@@ -24,17 +24,23 @@ exports.getAllBrands = (req, res) => {
 }
 
 // Create new book
-exports.createBrand = async (req, res) => {
-  const contents = JSON.parse(string(req.body));
-  assertBrandType(contents);
-  contents = Brand(contents);
+exports.createBrand = (req, res) => {
+  console.log('Received payload:', req.body);
+  console.log('type: ', typeof req.body);
+  const contents = req.body;
+  try {
+    assertBrandType(contents);
+  } catch (error) {
+      console.log(`There was an error creating a brand from the request with error: `, error );
+      process.exit(1);
+  }
   // Add new book to database
   knex('brands')
     .insert({ // insert new record, a book
       'name': contents.brandName,
-      'creator': contents.creator,
+      'creator': contents.brandCreator,
       'startingDate': contents.startingDate,
-      'luxury': contents.luxury,
+      'luxury': contents.luxury ? "true" : "false",
       'rating': contents.rating
     })
     .then(() => {

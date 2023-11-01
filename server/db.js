@@ -10,7 +10,13 @@ const knex = require('knex')({
   connection: {
     filename: dbPath,
   },
-  useNullAsDefault: true
+  useNullAsDefault: true,
+  typeCast: (field, next) => {
+    if (field.type === 'TINY' && field.length === 1) {
+      return field.string() === '1'; // 1 for true, 0 for false
+    }
+    return next();
+  },
 })
 
 // Create a table in the database called "books"
@@ -29,8 +35,8 @@ knex.schema
           table.increments('brandID').primary()
           table.string('name')
           table.string('creator')
-          table.date('startingDate')
-          table.boolean('luxury')
+          table.datetime('startingDate')
+          table.boolean('luxury').defaultTo(false).notNullable()
           table.integer('rating')
         })
         .then(() => {

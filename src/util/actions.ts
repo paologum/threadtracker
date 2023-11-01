@@ -34,7 +34,7 @@ export const getBrands = action("getBrands", async () => {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
+        console.log('getBrands: ', data);
         setBrands(data as Brand[])
     } catch (error) {
         console.log("Error getting brands with error: ", error)
@@ -46,10 +46,19 @@ export const setBrands = action("setBrands", (brands: Brand[]) => {
 })
 
 export const addBrands = action("addBrands", async(brand: BrandTextInputState) => {
+    console.log(brand);
+    console.log(JSON.stringify(brand));
     const body = JSON.stringify(brand);
-    const response = await fetcher('/createBrand', {
-        method: 'POST',
-        body: body 
-    });
-    await getBrands();
+    try {
+        const response = await fetcher('/router/createBrand', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+              },
+            body: body
+        });
+        await getBrands();
+    } catch (error) {
+        console.log("Error adding brands with error: ", error)
+    }
 })
