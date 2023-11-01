@@ -17,6 +17,8 @@ export const Home = observer (function () {
                         actions.addBrands(brandTextInputState);
                     }}>Add</Button>
                     <Button variant="contained" onClick={async ()=> {
+                    }}>Delete</Button>
+                    <Button variant="contained" onClick={async ()=> {
                         actions.resetBrands();
                     }}>Reset</Button>
                 </ButtonGroup>
