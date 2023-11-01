@@ -34,7 +34,7 @@ export const getBrands = action("getBrands", async () => {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         setBrands(data as Brand[])
     } catch (error) {
         console.log("Error getting brands with error: ", error)

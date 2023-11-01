@@ -18,7 +18,7 @@ export const Home = observer (function () {
                         actions.addBrands(brandTextInputState);
                     }}>Add</Button>
                     <Button variant="contained" onClick={async ()=> {
-                        console.log(rowSelection.rowIDs);
+                        // console.log(rowSelection.rowIDs);
                         actions.deleteBrand(rowSelection.rowIDs);
                     }}>Delete</Button>
                     <Button variant="contained" onClick={async ()=> {
@@ -35,7 +35,7 @@ export const Home = observer (function () {
                         actions.findBrand({
                             name: brandName,
                             creator: brandCreator,
-                            year: dayjs(startingDate).year().toString(),
+                            year: dayjs().set('year', startingDate).year().toString(),
                             luxury: luxury.toString(),
                             rating: rating.toString()
                         });

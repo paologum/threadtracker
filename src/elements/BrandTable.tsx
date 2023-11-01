@@ -27,7 +27,7 @@ const columns: GridColDef[] = [
   { field: 'creator', headerName: 'Brand Creator', width: 130 },
   { field: 'year', headerName: 'Founded', width: 120 },
   { field: 'luxury', headerName: 'Luxury?', width: 130 },
-  { field: 'rating', headerName: 'Rating', type: 'number', width: 130 },
+  { field: 'rating', headerName: 'Rating', type: 'number', width: 60 },
 ];
 export const rowSelection = new RowSelection();
 const BrandList: React.FC<BrandListProps> = ({ brands }) => {

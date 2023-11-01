@@ -14,7 +14,7 @@ exports.getAllBrands = (req, res) => {
     .from('brands') // from 'brand' table
     .then((brands) => {
       // Send brands extracted from database in response
-      console.log(brands);
+      // console.log(brands);
       res.json(brands);
     })
     .catch(err => {
@@ -25,8 +25,8 @@ exports.getAllBrands = (req, res) => {
 
 // Create new brand 
 exports.createBrand = (req, res) => {
-  console.log('Received payload:', req.body);
-  console.log('type: ', typeof req.body);
+  // console.log('Received payload:', req.body);
+  // console.log('type: ', typeof req.body);
   const contents = req.body;
   try {
     assertBrandType(contents);
@@ -56,7 +56,7 @@ exports.createBrand = (req, res) => {
 // Remove specific brand
 exports.deleteBrand = async (req, res) => {
   // Find specific brand in the database and remove it
-  console.log('Received payload: ', req.body);
+  // console.log('Received payload: ', req.body);
   knex('brands')
     .whereIn('brandID', req.body.ids) // find correct record based on id
     .del() // delete the record
@@ -96,7 +96,7 @@ exports.findBrand = async(req, res) => {
       'name': req.query.name,
       'creator': req.query.creator,
       'year': req.query.year,
-      'luxury': Boolean(req.query.luxury),
+      'luxury': req.query.luxury,
       'rating': req.query.rating
     })
     .limit(1)
