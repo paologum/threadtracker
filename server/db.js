@@ -35,8 +35,8 @@ knex.schema
           table.increments('brandID').primary()
           table.string('name')
           table.string('creator')
-          table.datetime('startingDate')
-          table.boolean('luxury').defaultTo(false).notNullable()
+          table.integer('year')
+          table.string('luxury')
           table.integer('rating')
         })
         .then(() => {

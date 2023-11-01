@@ -6,6 +6,7 @@ import BrandList, { rowSelection } from '../elements/BrandTable';
 import { context } from '../util/index';
 import BrandTextInput, { brandTextInputState } from '../elements/RowInput'
 import { ButtonGroup } from '@mui/material';
+import dayjs from 'dayjs';
 export const Home = observer (function () {
     const {state, actions} = useContext(context);
     return (
@@ -23,6 +24,22 @@ export const Home = observer (function () {
                     <Button variant="contained" onClick={async ()=> {
                         actions.resetBrands();
                     }}>Reset</Button>
+                    <Button variant="contained" onClick={async ()=> {
+                        const {
+                            brandName,
+                            brandCreator,
+                            startingDate,
+                            luxury,
+                            rating,
+                          } = brandTextInputState;
+                        actions.findBrand({
+                            name: brandName,
+                            creator: brandCreator,
+                            year: dayjs(startingDate).year().toString(),
+                            luxury: luxury.toString(),
+                            rating: rating.toString()
+                        });
+                    }}>Find</Button>
                 </ButtonGroup>
             </div>
             <BrandList brands= {state.brands}/>

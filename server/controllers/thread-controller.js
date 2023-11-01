@@ -14,7 +14,7 @@ exports.getAllBrands = (req, res) => {
     .from('brands') // from 'brand' table
     .then((brands) => {
       // Send brands extracted from database in response
-      // res.setHeader('Content-Type', 'application/json');
+      console.log(brands);
       res.json(brands);
     })
     .catch(err => {
@@ -39,7 +39,7 @@ exports.createBrand = (req, res) => {
     .insert({ // insert new record, a brand
       'name': contents.brandName,
       'creator': contents.brandCreator,
-      'startingDate': dayjs(contents.startingDate).year(),
+      'year': contents.startingDate,
       'luxury': contents.luxury ? "true" : "false",
       'rating': contents.rating
     })
@@ -84,5 +84,23 @@ exports.brandReset = async (req, res) => {
     .catch(err => {
       // Send a error message in response
       res.json({ message: `There was an error resetting brand list: ${err}.` })
+    })
+}
+
+exports.findBrand = async(req, res) => {
+  console.log('Received payload: ', req.query);
+  knex
+    .select('*')
+    .from('brands')
+    .where({
+      'name': req.query.name,
+      'creator': req.query.creator,
+      'year': req.query.year,
+      'luxury': Boolean(req.query.luxury),
+      'rating': req.query.rating
+    })
+    .limit(1)
+    .then((brand) => {
+      res.json(brand)
     })
 }

@@ -13,7 +13,7 @@ import dayjs, { Dayjs } from 'dayjs';
 export class BrandTextInputState {
   brandName = 'Brand';
   brandCreator = 'Creator';
-  startingDate = dayjs();
+  startingDate = dayjs().year();
   luxury = false;
   rating = 5;
 
@@ -42,7 +42,7 @@ export class BrandTextInputState {
   }
 
   setStartingDate(value: Dayjs) {
-    this.startingDate = value;
+    this.startingDate = value.year();
   }
 
   setLuxury(value: boolean) {
@@ -80,6 +80,9 @@ const BrandTextInput: React.FC = observer(function () {
           label="Brand Name"
           helperText="Required"
           defaultValue={brandName}
+          onChange={(e) => {
+            brandTextInputState.setBrandName(e.target.value);
+          }}
         />
         <TextField
           required
@@ -93,7 +96,7 @@ const BrandTextInput: React.FC = observer(function () {
         />
          <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker 
-          value={startingDate}
+          value={dayjs().set('year', startingDate)}
           views={['year']}
           slotProps={{
             textField: {

@@ -2,7 +2,7 @@ export interface Brand {
   brandID: number;
   name: string;
   creator: string;
-  startingDate: Date;
+  startingDate: number;
   luxury: boolean;
   rating: number;
   // Other properties...
