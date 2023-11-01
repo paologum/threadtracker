@@ -1,7 +1,6 @@
 import React from 'react';
 import './BrandTable.css'
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { color } from '@mui/system';
 import { Brand } from '../../shared/types' 
 
 
@@ -19,7 +18,6 @@ const columns: GridColDef[] = [
   { field: 'rating', headerName: 'Rating */10', type: 'number', width: 130 },
 ];
 const BrandList: React.FC<BrandListProps> = ({ brands }) => {
-    const keys = Object.keys(brands[0]);
     return (
       <div style={{ height: 400, width: '100%', color: 'light black' }}>
       <DataGrid

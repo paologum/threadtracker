@@ -2,9 +2,10 @@ import { action } from 'mobx'
 import { state, State } from './state'
 import { Brand } from '../../shared/types' 
 import { BrandTextInputState } from '../elements/RowInput';
+import { actions } from '.';
 // If you are running in dev mode, prefix URL's with the dev server URL:
 
-const devurl = "http://localhost:5173";
+const devurl = "http://localhost:3000";
 export function devSafeUrl(url: string) {
     if (!url.match(/^\//)) {
         console.log('WARNING: you did not use an absolute path for your URL in a request to fetcher (i.e. one starting with a /).');
@@ -33,13 +34,16 @@ export const getBrands = action("getBrands", async () => {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        state.brands = data; 
-        console.log(state.brands);
+        console.log(data);
+        setBrands(data as Brand[])
     } catch (error) {
         console.log("Error getting brands with error: ", error)
 
     }
 });
+export const setBrands = action("setBrands", (brands: Brand[]) => {
+    state.brands = brands;
+})
 
 export const addBrands = action("addBrands", async(brand: BrandTextInputState) => {
     const body = JSON.stringify(brand);

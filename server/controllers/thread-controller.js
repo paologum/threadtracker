@@ -14,6 +14,7 @@ exports.getAllBrands = (req, res) => {
     .then((brands) => {
       // Send books extracted from database in response
       // res.setHeader('Content-Type', 'application/json');
+      console.log(brands);
       res.json(brands);
     })
     .catch(err => {
