@@ -13,7 +13,7 @@ const columns: GridColDef[] = [
   { field: 'brandID', headerName: 'ID', width: 70 },
   { field: 'name', headerName: 'Brand Name', width: 130 },
   { field: 'creator', headerName: 'Brand Creator', width: 130 },
-  { field: 'startingDate', headerName: 'Founded', width: 220 },
+  { field: 'startingDate', headerName: 'Founded', width: 120 },
   { field: 'luxury', headerName: 'Luxury?', width: 130 },
   { field: 'rating', headerName: 'Rating */10', type: 'number', width: 130 },
 ];
