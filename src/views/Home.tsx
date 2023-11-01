@@ -11,9 +11,9 @@ export const Home = observer (function () {
         <div>
             <BrandTextInput />
             <div className="centered-container">
-                <Button variant="contained" onClick={() => {
-                // actions.getBrands();
-                console.log(brandTextInputState);
+                <Button variant="contained" onClick={async ()=> {
+                // actions.addBrands(brandTextInputState);
+                await actions.getBrands();
                 }}>Add Brand</Button>
             </div>
             <BrandList brands= {state.brands}/>

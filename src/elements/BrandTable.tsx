@@ -2,16 +2,9 @@ import React from 'react';
 import './BrandTable.css'
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { color } from '@mui/system';
+import { Brand } from '../../shared/types' 
 
-export interface Brand {
-  brandID: number;
-  name: string;
-  creator: string;
-  startingDate: Date;
-  luxury: boolean;
-  rating: number;
-  // Other properties...
-}
+
 
 interface BrandListProps {
   brands: Brand[];

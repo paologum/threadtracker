@@ -1,16 +1,20 @@
 
 // Import database
-const knex = require('./../db')
+const { BrandingWatermark, ContentPasteSearch } = require('@mui/icons-material');
+const { assertBrandType } = require('../types');
+const { Brand } = require('../../shared/types');
+const knex = require('./../db');
 
 // Retrieve all books
-exports.getAllBrands = async (req, res) => {
+exports.getAllBrands = (req, res) => {
   // Get all books from database
   knex
     .select('*') // select all records
     .from('brands') // from 'books' table
-    .then(userData => {
+    .then((brands) => {
       // Send books extracted from database in response
-      res.json(userData)
+      // res.setHeader('Content-Type', 'application/json');
+      res.json(brands);
     })
     .catch(err => {
       // Send a error message in response
@@ -20,21 +24,25 @@ exports.getAllBrands = async (req, res) => {
 
 // Create new book
 exports.createBrand = async (req, res) => {
+  const contents = JSON.parse(string(req.body));
+  assertBrandType(contents);
+  contents = Brand(contents);
   // Add new book to database
-  knex('books')
+  knex('brands')
     .insert({ // insert new record, a book
-      'name': req.body.author,
-      '': req.body.title,
-      'pubDate': req.body.pubDate,
-      'rating': req.body.rating
+      'name': contents.brandName,
+      'creator': contents.creator,
+      'startingDate': contents.startingDate,
+      'luxury': contents.luxury,
+      'rating': contents.rating
     })
     .then(() => {
       // Send a success message in response
-      res.json({ message: `Book \'${req.body.title}\' by ${req.body.author} created.` })
+      res.json({ message: `Brand \'${contents.name}\' by ${contents.creator} created.` })
     })
     .catch(err => {
       // Send a error message in response
-      res.json({ message: `There was an error creating ${req.body.title} book: ${err}` })
+      res.json({ message: `There was an error creating ${contents.name} brand: ${err}` })
     })
 }
 

@@ -1,7 +1,7 @@
 import { action } from 'mobx'
 import { state, State } from './state'
-import { Brand } from '../elements/BrandTable'
-import { numberInputClasses } from '@mui/base';
+import { Brand } from '../../shared/types' 
+import { BrandTextInputState } from '../elements/RowInput';
 // If you are running in dev mode, prefix URL's with the dev server URL:
 
 const devurl = "http://localhost:5173";
@@ -27,7 +27,25 @@ export async function fetcher(...args: Parameters<typeof fetch>): ReturnType<typ
     return fetch(...args);
 }
 export const getBrands = action("getBrands", async () => {
-    const response = await fetcher('/all',);
-    const data: Brand[] = await response.json();
-    state.brands = data; 
+    try {
+        const response = await fetcher('/router/all');
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        state.brands = data; 
+        console.log(state.brands);
+    } catch (error) {
+        console.log("Error getting brands with error: ", error)
+
+    }
 });
+
+export const addBrands = action("addBrands", async(brand: BrandTextInputState) => {
+    const body = JSON.stringify(brand);
+    const response = await fetcher('/createBrand', {
+        method: 'POST',
+        body: body 
+    });
+    await getBrands();
+})

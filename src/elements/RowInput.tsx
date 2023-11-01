@@ -10,7 +10,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
 
-class BrandTextInputState {
+export class BrandTextInputState {
   brandName = 'Brand';
   brandCreator = 'Creator';
   startingDate = dayjs();

@@ -15,7 +15,7 @@ router.get('/all', brandRoutes.getAllBrands)
 // Add route for POST request to create new book
 // In server.js, books route is specified as '/books'
 // this means that '/create' translates to '/books/create'
-router.post('/create', brandRoutes.createBrand)
+router.post('/createBrand', brandRoutes.createBrand)
 
 // Add route for PUT request to delete specific book
 // In server.js, books route is specified as '/books'
