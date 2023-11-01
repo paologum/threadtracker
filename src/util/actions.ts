@@ -34,7 +34,6 @@ export const getBrands = action("getBrands", async () => {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        console.log('getBrands: ', data);
         setBrands(data as Brand[])
     } catch (error) {
         console.log("Error getting brands with error: ", error)
@@ -44,9 +43,23 @@ export const getBrands = action("getBrands", async () => {
 export const setBrands = action("setBrands", (brands: Brand[]) => {
     state.brands = brands;
 })
+export const deleteBrand = action("deleteBrand", async (ids: number[]) => {
+    try {
+        await fetcher('/router/deleteBrand',{
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+              },
+            body: JSON.stringify({ids : ids})
+        });
+        await getBrands();
+    } catch (error) {
+        console.log('Error resetting brands with error: ', error);
+    }
+})
 export const resetBrands = action("resetBrands", async () => {
     try {
-        await fetcher('/router/reset',{
+        await fetcher('/router/resetBrands',{
             method: "PUT",
         });
         await getBrands();
@@ -56,8 +69,6 @@ export const resetBrands = action("resetBrands", async () => {
 })
 
 export const addBrands = action("addBrands", async(brand: BrandTextInputState) => {
-    console.log(brand);
-    console.log(JSON.stringify(brand));
     const body = JSON.stringify(brand);
     try {
         const response = await fetcher('/router/createBrand', {

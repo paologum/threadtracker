@@ -1,9 +1,21 @@
 import React from 'react';
 import './BrandTable.css'
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowSelectionModel, GridValueGetterParams } from '@mui/x-data-grid';
 import { Brand } from '../../shared/types' 
+import { action, makeObservable, observable } from 'mobx';
 
-
+export class RowSelection {
+  rowIDs: number[] = [];
+  constructor() {
+    makeObservable(this, {
+      rowIDs: observable,
+      setRowIDs: action
+    });
+  }
+  setRowIDs(value: GridRowSelectionModel) {
+    this.rowIDs = value.map((num) => num as number);
+  }
+}
 
 interface BrandListProps {
   brands: Brand[];
@@ -15,8 +27,9 @@ const columns: GridColDef[] = [
   { field: 'creator', headerName: 'Brand Creator', width: 130 },
   { field: 'startingDate', headerName: 'Founded', width: 120 },
   { field: 'luxury', headerName: 'Luxury?', width: 130 },
-  { field: 'rating', headerName: 'Rating */10', type: 'number', width: 130 },
+  { field: 'rating', headerName: 'Rating', type: 'number', width: 130 },
 ];
+export const rowSelection = new RowSelection();
 const BrandList: React.FC<BrandListProps> = ({ brands }) => {
     return (
       <div style={{ height: 400, width: '100%', color: 'light black' }}>
@@ -41,6 +54,7 @@ const BrandList: React.FC<BrandListProps> = ({ brands }) => {
         }}
         pageSizeOptions={[5, 10]}
         checkboxSelection
+        onRowSelectionModelChange={(callback, details) => rowSelection.setRowIDs(callback)}
         getRowId={(row) => row.brandID}
       />
     </div>

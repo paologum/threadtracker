@@ -6,25 +6,24 @@ const { Brand } = require('../../shared/types');
 const knex = require('./../db');
 const dayjs = require('dayjs');
 
-// Retrieve all books
+// Retrieve all brands
 exports.getAllBrands = (req, res) => {
-  // Get all books from database
+  // Get all brands from database
   knex
     .select('*') // select all records
-    .from('brands') // from 'books' table
+    .from('brands') // from 'brand' table
     .then((brands) => {
-      // Send books extracted from database in response
+      // Send brands extracted from database in response
       // res.setHeader('Content-Type', 'application/json');
-      console.log(brands);
       res.json(brands);
     })
     .catch(err => {
       // Send a error message in response
-      res.json({ message: `There was an error retrieving books: ${err}` })
+      res.json({ message: `There was an error retrieving brands: ${err}` })
     })
 }
 
-// Create new book
+// Create new brand 
 exports.createBrand = (req, res) => {
   console.log('Received payload:', req.body);
   console.log('type: ', typeof req.body);
@@ -35,9 +34,9 @@ exports.createBrand = (req, res) => {
       console.log(`There was an error creating a brand from the request with error: `, error );
       process.exit(1);
   }
-  // Add new book to database
+  // Add new brand to database
   knex('brands')
-    .insert({ // insert new record, a book
+    .insert({ // insert new record, a brand
       'name': contents.brandName,
       'creator': contents.brandCreator,
       'startingDate': dayjs(contents.startingDate).year(),
@@ -54,28 +53,29 @@ exports.createBrand = (req, res) => {
     })
 }
 
-// Remove specific book
-exports.booksDelete = async (req, res) => {
-  // Find specific book in the database and remove it
-  knex('books')
-    .where('id', req.body.id) // find correct record based on id
+// Remove specific brand
+exports.deleteBrand = async (req, res) => {
+  // Find specific brand in the database and remove it
+  console.log('Received payload: ', req.body);
+  knex('brands')
+    .whereIn('brandID', req.body.ids) // find correct record based on id
     .del() // delete the record
     .then(() => {
       // Send a success message in response
-      res.json({ message: `Book ${req.body.id} deleted.` })
+      res.json({ message: `brands ${req.body.id} deleted.` })
     })
     .catch(err => {
       // Send a error message in response
-      res.json({ message: `There was an error deleting ${req.body.id} book: ${err}` })
+      res.json({ message: `There was an error deleting ${req.body.id} brand: ${err}` })
     })
 }
 
-// Remove all books on the list
+// Remove all brand on the list
 exports.brandReset = async (req, res) => {
-  // Remove all books from database
+  // Remove all brand from database
   knex
     .select('*') // select all records
-    .from('brands') // from 'books' table
+    .from('brands') // from 'brand' table
     .truncate() // remove the selection
     .then(() => {
       // Send a success message in response

@@ -2,7 +2,7 @@ import './Home.css';
 import Button from '@mui/material/Button';
 import { observer } from 'mobx-react' 
 import { useContext } from 'react';
-import BrandList from '../elements/BrandTable';   
+import BrandList, { rowSelection } from '../elements/BrandTable';   
 import { context } from '../util/index';
 import BrandTextInput, { brandTextInputState } from '../elements/RowInput'
 import { ButtonGroup } from '@mui/material';
@@ -17,6 +17,8 @@ export const Home = observer (function () {
                         actions.addBrands(brandTextInputState);
                     }}>Add</Button>
                     <Button variant="contained" onClick={async ()=> {
+                        console.log(rowSelection.rowIDs);
+                        actions.deleteBrand(rowSelection.rowIDs);
                     }}>Delete</Button>
                     <Button variant="contained" onClick={async ()=> {
                         actions.resetBrands();
