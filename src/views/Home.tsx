@@ -4,7 +4,7 @@ import { observer } from 'mobx-react'
 import { useContext } from 'react';
 import BrandList, { rowSelection } from '../elements/BrandTable';   
 import { context } from '../util/index';
-import BrandTextInput, { brandTextInputState } from '../elements/RowInput'
+import BrandTextInput, { error, brandTextInputState } from '../elements/RowInput'
 import { ButtonGroup } from '@mui/material';
 import dayjs from 'dayjs';
 export const Home = observer (function () {
@@ -15,7 +15,27 @@ export const Home = observer (function () {
             <div className="centered-container">
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     <Button variant="contained" onClick={async ()=> {
-                        actions.addBrands(brandTextInputState);
+                        const {
+                            brandName,
+                            brandCreator,
+                            startingDate,
+                            luxury,
+                            rating,
+                          } = brandTextInputState;
+                        const find = await actions.findBrand({
+                            name: brandName,
+                            creator: brandCreator,
+                            year: dayjs().set('year', startingDate).year().toString(),
+                            luxury: luxury.toString(),
+                        });
+                        if (find.length > 0) {
+                            error.setError(true);
+                            error.setText("Brand already exists");
+                        } else {
+                            actions.addBrands(brandTextInputState);
+                            error.setNormal();
+                        }
+
                     }}>Add</Button>
                     <Button variant="contained" onClick={async ()=> {
                         // console.log(rowSelection.rowIDs);
@@ -24,22 +44,6 @@ export const Home = observer (function () {
                     <Button variant="contained" onClick={async ()=> {
                         actions.resetBrands();
                     }}>Reset</Button>
-                    <Button variant="contained" onClick={async ()=> {
-                        const {
-                            brandName,
-                            brandCreator,
-                            startingDate,
-                            luxury,
-                            rating,
-                          } = brandTextInputState;
-                        actions.findBrand({
-                            name: brandName,
-                            creator: brandCreator,
-                            year: dayjs().set('year', startingDate).year().toString(),
-                            luxury: luxury.toString(),
-                            rating: rating.toString()
-                        });
-                    }}>Find</Button>
                 </ButtonGroup>
             </div>
             <BrandList brands= {state.brands}/>

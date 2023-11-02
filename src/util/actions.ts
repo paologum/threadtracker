@@ -34,7 +34,7 @@ export const getBrands = action("getBrands", async () => {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        // console.log(data);
+        console.log(data);
         setBrands(data as Brand[])
     } catch (error) {
         console.log("Error getting brands with error: ", error)
@@ -68,7 +68,7 @@ export const resetBrands = action("resetBrands", async () => {
         console.log('Error resetting brands with error: ', error);
     }
 })
-export const findBrand = action("findBrand", async (brand: {name: string, creator: string, year: string, luxury: string, rating: string}) => {
+export const findBrand = action("findBrand", async (brand: {name: string, creator: string, year: string, luxury: string,}) => {
     const url = new URLSearchParams(brand).toString();
     try {
         const response = await fetcher(`/router/findBrand?${url}`,{

@@ -97,7 +97,6 @@ exports.findBrand = async(req, res) => {
       'creator': req.query.creator,
       'year': req.query.year,
       'luxury': req.query.luxury,
-      'rating': req.query.rating
     })
     .limit(1)
     .then((brand) => {
