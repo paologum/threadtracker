@@ -5,6 +5,9 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Button, Menu, MenuItem } from '@mui/material';
+import { action, makeObservable, observable } from 'mobx';
+import { Action } from '@remix-run/router';
 
 const darkTheme = createTheme({
     palette: {
@@ -14,8 +17,41 @@ const darkTheme = createTheme({
       },
     },
   });
+const pages = ['Brands', 'Products', 'Drops']
+class State {
+  anchorElNav :null | HTMLElement = null;
+  anchorElUser:null | HTMLElement = null;
+  constructor() {
+    makeObservable(this, {
+      anchorElNav: observable,
+      anchorElUser: observable,
+      handleOpenNavMenu: action,
+      handleOpenUserMenu: action,
+      handleCloseNavMenu: action,
+      handleCloseUserMenu: action
+    })
+  };
+
+  handleOpenNavMenu(value: React.MouseEvent<HTMLElement>) {
+    this.anchorElNav = value.currentTarget;
+  };
+
+  handleOpenUserMenu(value: React.MouseEvent<HTMLElement>) {
+    this.anchorElUser = value.currentTarget;
+  };
+
+  handleCloseNavMenu() {
+    this.anchorElNav = null;
+  };
+
+  handleCloseUserMenu() {
+    this.anchorElUser = null;
+  };
+}
 
 
+
+const state = new State();
 export default function TabBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -31,9 +67,41 @@ export default function TabBar() {
                 >
                 <MenuIcon />
                 </IconButton>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                Home 
-                </Typography>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={state.anchorElNav}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                  open={Boolean(state.anchorElNav)}
+                  onClose={state.handleCloseNavMenu}
+                  sx={{
+                    display: { xs: 'block', md: 'none' },
+                  }}
+                >
+                  {pages.map((page) => (
+                    <MenuItem key={page} onClick={state.handleCloseNavMenu}>
+                      <Typography textAlign="center">{page}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+                <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                  {pages.map((page) => (
+                    <Button
+                      key={page}
+                      onClick={state.handleCloseNavMenu}
+                      sx={{ my: 2, color: 'white', display: 'block' }}
+                    >
+                      {page}
+                    </Button>
+                  ))}
+                </Box>
             </Toolbar>
             </AppBar>
       </ThemeProvider>
