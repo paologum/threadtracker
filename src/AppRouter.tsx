@@ -7,6 +7,8 @@ import Brands from './views/Brands';
 import './AppRouter.css'
 import { useContext } from 'react';
 import { context } from './util';
+import Drops from './views/Drops';
+import Products from './views/Products';
 
 export default observer(function AppRouter () {
   const navigate = useNavigate();
@@ -20,8 +22,8 @@ export default observer(function AppRouter () {
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/brands" element={<Brands/>} />
-        <Route path="/products" element={<Brands/>} />
-        <Route path="/drops" element={<Brands/>} />
+        <Route path="/products" element={<Products/>} />
+        <Route path="/drops" element={<Drops/>} />
         {/* Add more routes as needed */}
       </Routes>
     </div>

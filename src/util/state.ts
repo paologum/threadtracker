@@ -13,10 +13,4 @@ export const state = observable<State>( {
         path:'/home'
     }
 },
-        // brandID: 1,
-        // name: 'Margiela',
-        // creator: 'Martin Margiela',
-        // startingDate: new Date('1973-1-1'),
-        // luxury: true,
-        // rating: 10
 )

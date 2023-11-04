@@ -38,43 +38,11 @@ const pages: Page[] = [
         path: '/drops'
     },
 ];
-class State {
-  anchorElNav :null | HTMLElement = null;
-  anchorElUser:null | HTMLElement = null;
-  constructor() {
-    makeObservable(this, {
-      anchorElNav: observable,
-      anchorElUser: observable,
-      handleOpenNavMenu: action,
-      handleOpenUserMenu: action,
-      handleCloseNavMenu: action,
-      handleCloseUserMenu: action
-    })
-  };
-
-  handleOpenNavMenu(value: React.MouseEvent<HTMLElement>) {
-    this.anchorElNav = value.currentTarget;
-  };
-
-  handleOpenUserMenu(value: React.MouseEvent<HTMLElement>) {
-    this.anchorElUser = value.currentTarget;
-  };
-
-  handleCloseNavMenu() {
-    this.anchorElNav = null;
-  };
-
-  handleCloseUserMenu() {
-    this.anchorElUser = null;
-  };
-}
-
 
 
 interface TabBarProps {
   onTabChange: (path: string) => void;
 }
-const state = new State();
 export const TabBar: React.FC<TabBarProps> = observer (function ({onTabChange}) {
   const {state, actions} = useContext(context);
   return (
@@ -91,30 +59,6 @@ export const TabBar: React.FC<TabBarProps> = observer (function ({onTabChange}) 
                 >
                 <MenuIcon />
                 </IconButton>
-                {/* <Menu
-                  id="menu-appbar"
-                  anchorEl={state.anchorElNav}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                  }}
-                  open={Boolean(state.anchorElNav)}
-                  onClose={state.handleCloseNavMenu}
-                  sx={{
-                    display: { xs: 'block', md: 'none' },
-                  }}
-                >
-                  {pages.map((page) => (
-                    <MenuItem key={page} onClick={state.handleCloseNavMenu}>
-                      <Typography textAlign="center">{page}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu> */}
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                   {pages.map((page, index) => (
                     <Button

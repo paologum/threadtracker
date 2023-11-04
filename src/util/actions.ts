@@ -4,6 +4,7 @@ import { Brand } from '../../shared/types'
 import { BrandTextInputState } from '../elements/RowInput';
 import { actions } from '.';
 import { useNavigate } from 'react-router-dom';
+import requests from './constants';
 // If you are running in dev mode, prefix URL's with the dev server URL:
 
 const devurl = "http://localhost:3000";
@@ -22,21 +23,34 @@ export function devSafeUrl(url: string) {
     return devurl + url;
 }
 
+// A wrapper around the fetch API that ensures the URL is safe for development.
+// It prepends a development server URL if necessary.
 export async function fetcher(...args: Parameters<typeof fetch>): ReturnType<typeof fetch> {
     if (typeof args[0] === 'string') { 
         args[0] = devSafeUrl(args[0]);
     }
     return fetch(...args);
 }
-export const getBrands = action("getBrands", async () => {
+export const getAll = action("getAll", async (table: string) => {
     try {
-        const response = await fetcher('/router/all');
+        const url = new URLSearchParams({table: table}).toString();
+        const response = await fetcher(`${requests.getAll}?${url}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+              },
+        });
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
         console.log(data);
-        setBrands(data as Brand[])
+        switch(table){
+            case "brands": {
+                setBrands(data as Brand[])
+                break;
+            }
+        }
     } catch (error) {
         console.log("Error getting brands with error: ", error)
 
@@ -47,32 +61,33 @@ export const setBrands = action("setBrands", (brands: Brand[]) => {
 })
 export const deleteBrand = action("deleteBrand", async (ids: number[]) => {
     try {
-        await fetcher('/router/deleteBrand',{
+        await fetcher(requests.deleteBrand,{
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',
               },
             body: JSON.stringify({ids : ids})
         });
-        await getBrands();
+        await getAll("brands");
     } catch (error) {
         console.log('Error resetting brands with error: ', error);
     }
 })
 export const resetBrands = action("resetBrands", async () => {
     try {
-        await fetcher('/router/resetBrands',{
+        await fetcher(requests.resetBrand,{
             method: "PUT",
         });
-        await getBrands();
+        await getAll("brands");
     } catch (error) {
         console.log('Error resetting brands with error: ', error);
     }
 })
+
 export const findBrand = action("findBrand", async (brand: {name: string, creator: string, year: string, luxury: string,}) => {
     const url = new URLSearchParams(brand).toString();
     try {
-        const response = await fetcher(`/router/findBrand?${url}`,{
+        const response = await fetcher(`${requests.findBrand}?${url}`,{
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -89,14 +104,29 @@ export const findBrand = action("findBrand", async (brand: {name: string, creato
 export const addBrands = action("addBrands", async(brand: BrandTextInputState) => {
     const body = JSON.stringify(brand);
     try {
-        const response = await fetcher('/router/createBrand', {
+        const response = await fetcher(requests.addBrand, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
               },
             body: body
         });
-        await getBrands();
+        await getAll("brands");
+    } catch (error) {
+        console.log("Error adding brands with error: ", error)
+    }
+})
+export const createRow = action("createRow", async(table: string, row: any) => {
+    const body = JSON.stringify(row);
+    try {
+        const response = await fetcher(`${requests.createRow}/${table}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+              },
+            body: body
+        });
+        await getAll(table);
     } catch (error) {
         console.log("Error adding brands with error: ", error)
     }

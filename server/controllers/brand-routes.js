@@ -1,27 +1,7 @@
 
 // Import database
-const { BrandingWatermark, ContentPasteSearch } = require('@mui/icons-material');
 const { assertBrandType } = require('../types');
-const { Brand } = require('../../shared/types');
-const knex = require('./../db');
-const dayjs = require('dayjs');
-
-// Retrieve all brands
-exports.getAllBrands = (req, res) => {
-  // Get all brands from database
-  knex
-    .select('*') // select all records
-    .from('brands') // from 'brand' table
-    .then((brands) => {
-      // Send brands extracted from database in response
-      // console.log(brands);
-      res.json(brands);
-    })
-    .catch(err => {
-      // Send a error message in response
-      res.json({ message: `There was an error retrieving brands: ${err}` })
-    })
-}
+const knex = require('../db');
 
 // Create new brand 
 exports.createBrand = (req, res) => {
