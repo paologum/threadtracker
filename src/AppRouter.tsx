@@ -20,6 +20,8 @@ export default observer(function AppRouter () {
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/brands" element={<Brands/>} />
+        <Route path="/products" element={<Brands/>} />
+        <Route path="/drops" element={<Brands/>} />
         {/* Add more routes as needed */}
       </Routes>
     </div>

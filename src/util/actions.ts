@@ -101,6 +101,3 @@ export const addBrands = action("addBrands", async(brand: BrandTextInputState) =
         console.log("Error adding brands with error: ", error)
     }
 })
-// export const setTab = action("setTab", (value: number) => {
-//     state.tab = value;
-// })

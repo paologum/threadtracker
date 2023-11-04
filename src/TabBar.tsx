@@ -29,6 +29,14 @@ const pages: Page[] = [
         name: 'Brands',
         path: '/brands'
     },
+    {
+        name: 'Products',
+        path: '/products'
+    },
+    {
+        name: 'Drops',
+        path: '/drops'
+    },
 ];
 class State {
   anchorElNav :null | HTMLElement = null;
