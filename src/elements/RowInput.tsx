@@ -71,8 +71,8 @@ export class ErrorType {
     this.text=value;
   }
   setNormal() {
-    this.error=false;
-    this.text="";
+    this.setError(false)
+    this.setText("")
   }
 }
 export const error = new ErrorType;

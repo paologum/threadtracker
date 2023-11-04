@@ -7,7 +7,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Button, Menu, MenuItem } from '@mui/material';
 import { action, makeObservable, observable } from 'mobx';
-import { Action } from '@remix-run/router';
+import { observer } from 'mobx-react';
+import { useContext } from 'react';
+import { context } from './util/index';
+import { Page } from './util/types';
 
 const darkTheme = createTheme({
     palette: {
@@ -17,7 +20,16 @@ const darkTheme = createTheme({
       },
     },
   });
-const pages = ['Brands', 'Products', 'Drops']
+const pages: Page[] = [
+    {
+        name: 'Home',
+        path: '/'
+    },
+    {
+        name: 'Brands',
+        path: '/brands'
+    },
+];
 class State {
   anchorElNav :null | HTMLElement = null;
   anchorElUser:null | HTMLElement = null;
@@ -51,8 +63,12 @@ class State {
 
 
 
+interface TabBarProps {
+  onTabChange: (path: string) => void;
+}
 const state = new State();
-export default function TabBar() {
+export const TabBar: React.FC<TabBarProps> = observer (function ({onTabChange}) {
+  const {state, actions} = useContext(context);
   return (
     <Box sx={{ flexGrow: 1 }}>
         <ThemeProvider theme={darkTheme}>
@@ -67,7 +83,7 @@ export default function TabBar() {
                 >
                 <MenuIcon />
                 </IconButton>
-                <Menu
+                {/* <Menu
                   id="menu-appbar"
                   anchorEl={state.anchorElNav}
                   anchorOrigin={{
@@ -90,15 +106,15 @@ export default function TabBar() {
                       <Typography textAlign="center">{page}</Typography>
                     </MenuItem>
                   ))}
-                </Menu>
+                </Menu> */}
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                  {pages.map((page) => (
+                  {pages.map((page, index) => (
                     <Button
-                      key={page}
-                      onClick={state.handleCloseNavMenu}
+                      key={index}
+                      onClick={() => {onTabChange(page.path)}}
                       sx={{ my: 2, color: 'white', display: 'block' }}
                     >
-                      {page}
+                      {page.name}
                     </Button>
                   ))}
                 </Box>
@@ -107,4 +123,4 @@ export default function TabBar() {
       </ThemeProvider>
     </Box>
   );
-}
+});

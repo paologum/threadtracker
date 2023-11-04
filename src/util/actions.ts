@@ -3,6 +3,7 @@ import { state, State } from './state'
 import { Brand } from '../../shared/types' 
 import { BrandTextInputState } from '../elements/RowInput';
 import { actions } from '.';
+import { useNavigate } from 'react-router-dom';
 // If you are running in dev mode, prefix URL's with the dev server URL:
 
 const devurl = "http://localhost:3000";
@@ -100,3 +101,6 @@ export const addBrands = action("addBrands", async(brand: BrandTextInputState) =
         console.log("Error adding brands with error: ", error)
     }
 })
+// export const setTab = action("setTab", (value: number) => {
+//     state.tab = value;
+// })

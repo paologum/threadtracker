@@ -7,7 +7,7 @@ import { context } from '../util/index';
 import BrandTextInput, { error, brandTextInputState } from '../elements/RowInput'
 import { ButtonGroup } from '@mui/material';
 import dayjs from 'dayjs';
-export const Home = observer (function () {
+const Home: React.FC= observer (function () {
     const {state, actions} = useContext(context);
     return (
         <div>
@@ -49,3 +49,4 @@ export const Home = observer (function () {
             <BrandList brands= {state.brands}/>
         </div>
     )});
+export default Home;
