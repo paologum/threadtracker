@@ -1,9 +1,10 @@
 import { observable } from 'mobx';
-import { Brand } from '../../shared/types';
+import { Brand, Product } from '../../shared/types';
 import { Page } from './types';
 export type State =  {
     brands: Brand[];
     page: Page;
+    products: Product[];
 }
 
 export const state = observable<State>( {
@@ -11,6 +12,7 @@ export const state = observable<State>( {
     page: {
         name:'Home',
         path:'/home'
-    }
+    },
+    products: []
 },
 )

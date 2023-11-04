@@ -19,18 +19,11 @@ const knex = require('knex')({
   },
 })
 
-// Create a table in the database called "books"
+// Create a table in the database called "brands"
 knex.schema
-  // Make sure no "books" table exists
-  // before trying to create new
   .hasTable('brands')
     .then((exists) => {
       if (!exists) {
-        // If no "books" table exists
-        // create new, with "id", "author", "title",
-        // "pubDate" and "rating" columns
-        // and use "id" as a primary identification
-        // and increment "id" with every new record (book)
         return knex.schema.createTable('brands', (table)  => {
           table.increments('brandID').primary()
           table.string('name')
@@ -56,22 +49,15 @@ knex.schema
       console.error(`There was an error setting up the database: ${error}`)
     })
 knex.schema
-  // Make sure no "books" table exists
-  // before trying to create new
   .hasTable('products')
     .then((exists) => {
       if (!exists) {
-        // If no "books" table exists
-        // create new, with "id", "author", "title",
-        // "pubDate" and "rating" columns
-        // and use "id" as a primary identification
-        // and increment "id" with every new record (book)
         return knex.schema.createTable('products', (table)  => {
           table.increments('productID').primary()
-          table.string('name')
+          table.integer('dropID')
           table.integer('brandID')
+          table.string('name')
           table.integer('price')
-          table.date('releaseDate')
           table.string('material')
           table.string('category')
           table.string('color')

@@ -55,7 +55,7 @@ const Brands: React.FC= observer (function () {
                     }}>Reset</Button>
                 </ButtonGroup>
             </div>
-            <GeneralDataGrid brands= {state.brands} columns={columns}/>
+            <GeneralDataGrid rows= {state.brands} columns={columns}/>
         </div>
     )});
 export default Brands;

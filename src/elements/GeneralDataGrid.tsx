@@ -18,16 +18,16 @@ export class RowSelection {
 }
 
 interface GeneralDataGridProps {
-  brands: Brand[];
+  rows: any[];
   columns: GridColDef[];
 }
 
 export const rowSelection = new RowSelection();
-const GeneralDataGrid: React.FC<GeneralDataGridProps> = ({ brands, columns }) => {
+const GeneralDataGrid: React.FC<GeneralDataGridProps> = ({ rows, columns }) => {
     return (
       <div style={{ height: 400, width: '100%', color: 'light black' }}>
       <DataGrid
-        rows={brands}
+        rows={rows}
         columns={columns}
         sx={{
           boxShadow: 2,

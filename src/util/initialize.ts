@@ -5,6 +5,7 @@ export async function initialize() {
     // as the server hosts the /charts endpoint.  So, we'll hard-code that for ourselves here.
     try {
       actions.getAll('brands');
+      actions.getAll('products');
       console.log('Brands loaded');
     } catch(e: any) {
       console.log('FAILED to retrieve presets.  Error was: ', e);

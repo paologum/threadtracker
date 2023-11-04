@@ -1,6 +1,6 @@
 import { action } from 'mobx'
 import { state, State } from './state'
-import { Brand } from '../../shared/types' 
+import { Brand, Product } from '../../shared/types' 
 import { BrandTextInputState } from '../elements/RowInput';
 import { actions } from '.';
 import { useNavigate } from 'react-router-dom';
@@ -50,15 +50,16 @@ export const getAll = action("getAll", async (table: string) => {
                 setBrands(data as Brand[])
                 break;
             }
+            case "products": {
+                setProducts(data as Product[])
+                break;
+            }
         }
     } catch (error) {
         console.log("Error getting brands with error: ", error)
 
     }
 });
-export const setBrands = action("setBrands", (brands: Brand[]) => {
-    state.brands = brands;
-})
 export const deleteBrand = action("deleteBrand", async (ids: number[]) => {
     try {
         await fetcher(requests.deleteBrand,{
@@ -130,4 +131,10 @@ export const createRow = action("createRow", async(table: string, row: any) => {
     } catch (error) {
         console.log("Error adding brands with error: ", error)
     }
+})
+export const setBrands = action("setBrands", (brands: Brand[]) => {
+    state.brands = brands;
+})
+export const setProducts = action("setProducts", (products: Product[]) => {
+    state.products = products;
 })
