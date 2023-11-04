@@ -55,6 +55,7 @@ export const getAll = action("getAll", async (table: string) => {
                 break;
             }
         }
+        console.log("response: ", await response.json());
     } catch (error) {
         console.log("Error getting brands with error: ", error)
 
@@ -113,12 +114,14 @@ export const addBrands = action("addBrands", async(brand: BrandTextInputState) =
             body: body
         });
         await getAll("brands");
+        console.log("response: ", await response.json());
     } catch (error) {
         console.log("Error adding brands with error: ", error)
     }
 })
 export const createRow = action("createRow", async(table: string, row: any) => {
     const body = JSON.stringify(row);
+    console.log(body);
     try {
         const response = await fetcher(`${requests.createRow}/${table}`, {
             method: 'POST',
@@ -128,6 +131,7 @@ export const createRow = action("createRow", async(table: string, row: any) => {
             body: body
         });
         await getAll(table);
+        console.log("response: ", await response.json());
     } catch (error) {
         console.log("Error adding brands with error: ", error)
     }

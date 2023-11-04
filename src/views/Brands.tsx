@@ -24,16 +24,16 @@ const Brands: React.FC= observer (function () {
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     <Button variant="contained" onClick={async ()=> {
                         const {
-                            brandName,
-                            brandCreator,
-                            startingDate,
+                            name,
+                            creator,
+                            year,
                             luxury,
                           } = brandTextInputState;
                         // check if it already exists
                         const find = await actions.findBrand({
-                            name: brandName,
-                            creator: brandCreator,
-                            year: dayjs().set('year', startingDate).year().toString(),
+                            name: name,
+                            creator: creator,
+                            year: dayjs().set('year', year).year().toString(),
                             luxury: luxury.toString(),
                         });
                         // if we find something in the database that matches, do not create a brand

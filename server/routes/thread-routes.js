@@ -11,6 +11,6 @@ router.put('/deleteBrand', brandRoutes.deleteBrand)
 router.put('/resetBrands', brandRoutes.brandReset)
 router.get('/findBrand', brandRoutes.findBrand)
 router.get('/getAll', generalRoutes.getAll)
-router.get('/createRow:tablename', generalRoutes.createRow)
+router.post('/createRow/:tablename', generalRoutes.createRow)
 
 module.exports = router

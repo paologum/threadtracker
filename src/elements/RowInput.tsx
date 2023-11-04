@@ -11,17 +11,17 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
 
 export class BrandTextInputState {
-  brandName = 'Brand';
-  brandCreator = 'Creator';
-  startingDate = dayjs().year();
+  name = 'Brand';
+  creator = 'Creator';
+  year = dayjs().year();
   luxury = false;
   rating = 5;
 
   constructor() {
     makeObservable(this, {
-      brandName: observable,
-      brandCreator: observable,
-      startingDate: observable,
+      name: observable,
+      creator: observable,
+      year: observable,
       luxury: observable,
       rating: observable,
       setBrandName: action,
@@ -34,15 +34,15 @@ export class BrandTextInputState {
 
   // Add actions to modify the state
   setBrandName(value: string) {
-    this.brandName = value;
+    this.name = value;
   }
 
   setBrandCreator(value: string) {
-    this.brandCreator = value;
+    this.creator = value;
   }
 
   setStartingDate(value: Dayjs) {
-    this.startingDate = value.year();
+    this.year = value.year();
   }
 
   setLuxury(value: boolean) {
@@ -81,9 +81,9 @@ export const brandTextInputState = new BrandTextInputState();
 
 const BrandTextInput: React.FC = observer(function () {
   const {
-    brandName,
-    brandCreator,
-    startingDate,
+    name,
+    creator,
+    year,
     luxury,
     rating,
   } = brandTextInputState;
@@ -104,7 +104,7 @@ const BrandTextInput: React.FC = observer(function () {
             id="outlined-required"
             label="Brand Name"
             helperText="Required"
-            defaultValue={brandName}
+            defaultValue={name}
             onChange={(e) => {
               brandTextInputState.setBrandName(e.target.value);
             }}
@@ -114,14 +114,14 @@ const BrandTextInput: React.FC = observer(function () {
             id="outlined-required"
             label="Brand Creator"
             helperText="Required"
-            defaultValue={brandCreator}
+            defaultValue={creator}
             onChange={(e) => {
               brandTextInputState.setBrandCreator(e.target.value);
             }}
           />
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker 
-            value={dayjs().set('year', startingDate)}
+            value={dayjs().set('year', year)}
             views={['year']}
             slotProps={{
               textField: {

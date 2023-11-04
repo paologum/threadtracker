@@ -68,7 +68,7 @@ exports.brandReset = async (req, res) => {
 }
 
 exports.findBrand = async(req, res) => {
-  console.log('Received payload: ', req.query);
+  console.log('Received payload for findBrand: ', req.query);
   knex
     .select('*')
     .from('brands')
