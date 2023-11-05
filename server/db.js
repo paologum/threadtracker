@@ -29,7 +29,7 @@ knex.schema
           table.string('name')
           table.string('creator')
           table.integer('year')
-          table.string('luxury')
+          table.boolean('luxury')
           table.integer('rating')
         })
         .then(() => {

@@ -3,7 +3,7 @@ import { observer } from 'mobx-react'
 import { useContext } from 'react';
 import GeneralDataGrid, { rowSelection } from '../elements/GeneralDataGrid';   
 import { context } from '../util/index';
-import BrandTextInput, { error, brandTextInputState } from '../elements/RowInput'
+import BrandTextInput, { error } from '../elements/RowInput'
 import { ButtonGroup } from '@mui/material';
 import dayjs from 'dayjs';
 import { GridColDef } from '@mui/x-data-grid';
@@ -28,20 +28,22 @@ const Brands: React.FC= observer (function () {
                             creator,
                             year,
                             luxury,
-                          } = brandTextInputState;
-                        // check if it already exists
+                          } = state.brandInput;
+                        // check if it already exists.
+                        // SQL for some reason only accepts 1's and 0's for booleans
+                        // So change the boolean to a string of 1 or 0
                         const find = await actions.findBrand({
                             name: name,
                             creator: creator,
                             year: dayjs().set('year', year).year().toString(),
-                            luxury: luxury.toString(),
+                            luxury: luxury ? "1" : "0",
                         });
                         // if we find something in the database that matches, do not create a brand
                         if (find.length > 0) {
                             error.setError(true);
                             error.setText("Brand already exists");
                         } else {
-                            actions.createRow("brands", brandTextInputState);
+                            actions.createRow("brands", state.brandInput);
                             error.setNormal();
                         }
 

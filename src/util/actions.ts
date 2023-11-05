@@ -1,10 +1,9 @@
 import { action } from 'mobx'
 import { state, State } from './state'
 import { Brand, Product } from '../../shared/types' 
-import { BrandTextInputState } from '../elements/RowInput';
-import { actions } from '.';
 import { useNavigate } from 'react-router-dom';
 import requests from './constants';
+import { BrandInputState } from './types';
 // If you are running in dev mode, prefix URL's with the dev server URL:
 
 const devurl = "http://localhost:3000";
@@ -47,6 +46,10 @@ export const getAll = action("getAll", async (table: string) => {
         console.log(data);
         switch(table){
             case "brands": {
+                let content = data as Brand[];
+                content.map((row, index) => {
+                    row.luxury = row.luxury ? "Yes" : "No"
+                })
                 setBrands(data as Brand[])
                 break;
             }
@@ -55,7 +58,7 @@ export const getAll = action("getAll", async (table: string) => {
                 break;
             }
         }
-        console.log("response: ", await response.json());
+        console.log("response: ", data);
     } catch (error) {
         console.log("Error getting brands with error: ", error)
 
@@ -103,7 +106,7 @@ export const findBrand = action("findBrand", async (brand: {name: string, creato
     }
 })
 
-export const addBrands = action("addBrands", async(brand: BrandTextInputState) => {
+export const addBrands = action("addBrands", async(brand: BrandInputState) => {
     const body = JSON.stringify(brand);
     try {
         const response = await fetcher(requests.addBrand, {
@@ -141,4 +144,19 @@ export const setBrands = action("setBrands", (brands: Brand[]) => {
 })
 export const setProducts = action("setProducts", (products: Product[]) => {
     state.products = products;
+})
+export const setBrandName = action("setBrandName", (value: string) => {
+    state.brandInput.name=value;
+})
+export const setBrandCreator = action("setBrandCreator", (value: string) => {
+    state.brandInput.name=value;
+})
+export const setBrandYear = action("setBrandYear", (value: number) => {
+    state.brandInput.year=value;
+})
+export const setBrandRating = action("setBrandRating", (value: number) => {
+    state.brandInput.rating=value;
+})
+export const setBrandLuxury = action("setBrandLuxury", (value: boolean) => {
+    state.brandInput.luxury=value;
 })

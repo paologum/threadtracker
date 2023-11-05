@@ -2,91 +2,18 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel, InputLabel, MenuItem, Rating, Select, Typography } from '@mui/material';
-import { state } from '../util';
-import { action, makeObservable, observable } from 'mobx';
+import { context} from '../util';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { observer } from 'mobx-react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
+import { ErrorType } from '../util/types';
 
-export class BrandTextInputState {
-  name = 'Brand';
-  creator = 'Creator';
-  year = dayjs().year();
-  luxury = false;
-  rating = 5;
-
-  constructor() {
-    makeObservable(this, {
-      name: observable,
-      creator: observable,
-      year: observable,
-      luxury: observable,
-      rating: observable,
-      setBrandName: action,
-      setBrandCreator: action,
-      setStartingDate: action,
-      setLuxury: action,
-      setRating: action,
-    });
-  }
-
-  // Add actions to modify the state
-  setBrandName(value: string) {
-    this.name = value;
-  }
-
-  setBrandCreator(value: string) {
-    this.creator = value;
-  }
-
-  setStartingDate(value: Dayjs) {
-    this.year = value.year();
-  }
-
-  setLuxury(value: boolean) {
-    this.luxury = value;
-  }
-
-  setRating(value: number) {
-    this.rating = value;
-  }
-}
-export class ErrorType {
-  error=false;
-  text="";
-  constructor() {
-    makeObservable(this, {
-      error: observable,
-      text: observable,
-      setError: action,
-      setText: action
-    });
-  }
-  setError(value: boolean) {
-    this.error=value;
-  }
-  setText(value:string){
-    this.text=value;
-  }
-  setNormal() {
-    this.setError(false)
-    this.setText("")
-  }
-}
 export const error = new ErrorType;
 
-export const brandTextInputState = new BrandTextInputState();
-
 const BrandTextInput: React.FC = observer(function () {
-  const {
-    name,
-    creator,
-    year,
-    luxury,
-    rating,
-  } = brandTextInputState;
+  const {state, actions} = React.useContext(context);
   return (
     <Box
       component="form"
@@ -106,7 +33,7 @@ const BrandTextInput: React.FC = observer(function () {
             helperText="Required"
             defaultValue={name}
             onChange={(e) => {
-              brandTextInputState.setBrandName(e.target.value);
+              actions.setBrandName(e.target.value);
             }}
           />
           <TextField
@@ -114,14 +41,14 @@ const BrandTextInput: React.FC = observer(function () {
             id="outlined-required"
             label="Brand Creator"
             helperText="Required"
-            defaultValue={creator}
+            defaultValue={state.brandInput.creator}
             onChange={(e) => {
-              brandTextInputState.setBrandCreator(e.target.value);
+              actions.setBrandCreator(e.target.value);
             }}
           />
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker 
-            value={dayjs().set('year', year)}
+            value={dayjs().set('year', state.brandInput.year)}
             views={['year']}
             slotProps={{
               textField: {
@@ -129,21 +56,21 @@ const BrandTextInput: React.FC = observer(function () {
               },
             }}
             onChange={(newVal) => {
-              brandTextInputState.setStartingDate(newVal!);
+              actions.setBrandYear(newVal!.year()!);
             }}
             label="Founded"/>
             </LocalizationProvider>
           <div>
             <FormControl sx={{width: '120', height: '100%', verticalAlign: 'middle', justifyContent: 'center', alignItems: 'center'}}>
-              <FormControlLabel control={<Checkbox value={luxury} onChange={(e) => {
-                brandTextInputState.setLuxury(e.target.checked)
+              <FormControlLabel control={<Checkbox value={state.brandInput.luxury} onChange={(e) => {
+                actions.setBrandLuxury(e.target.checked)
               }}/>} label="Luxury" />
             </FormControl>
-            <Typography component="legend">{rating + " out of 10"}</Typography>
+            <Typography component="legend">{state.brandInput.rating + " out of 10"}</Typography>
             <Rating 
               name="customized-10" 
               defaultValue={0} 
-              value={rating}
+              value={state.brandInput.rating}
               sx={{
                 '& .MuiRating-iconFilled': {
                   color: '#19388A',
@@ -155,7 +82,7 @@ const BrandTextInput: React.FC = observer(function () {
               max={10} 
               precision={0.5}
               onChange={(event, newVal) => {
-                brandTextInputState.setRating(newVal as number);
+                actions.setBrandRating(newVal as number);
               }}
               />
           </div>
