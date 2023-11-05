@@ -149,7 +149,7 @@ export const setBrandName = action("setBrandName", (value: string) => {
     state.brandInput.name=value;
 })
 export const setBrandCreator = action("setBrandCreator", (value: string) => {
-    state.brandInput.name=value;
+    state.brandInput.creator=value;
 })
 export const setBrandYear = action("setBrandYear", (value: number) => {
     state.brandInput.year=value;
@@ -159,4 +159,19 @@ export const setBrandRating = action("setBrandRating", (value: number) => {
 })
 export const setBrandLuxury = action("setBrandLuxury", (value: boolean) => {
     state.brandInput.luxury=value;
+})
+export const setProductName = action("setProductName", (value: string) => {
+    state.productInput.name=value;
+})
+export const setProductPrice = action("setProductPrice", (value: number) => {
+    state.productInput.price=value;
+})
+export const setProductMaterial = action("setProductMaterial", (value: string) => {
+    state.productInput.material=value;
+})
+export const setProductCategory = action("setProductCategory", (value: string) => {
+    state.productInput.category=value;
+})
+export const setProductColor = action("setProductColor", (value: string) => {
+    state.productInput.color=value;
 })

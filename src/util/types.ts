@@ -12,48 +12,14 @@ export interface BrandInputState {
     luxury: boolean,
     rating: number
 }
-export class BrandTextInputState {
-  name = 'Brand';
-  creator = 'Creator';
-  year = dayjs().year();
-  luxury = false;
-  rating = 5;
-
-  constructor() {
-    makeObservable(this, {
-      name: observable,
-      creator: observable,
-      year: observable,
-      luxury: observable,
-      rating: observable,
-      setBrandName: action,
-      setBrandCreator: action,
-      setStartingDate: action,
-      setLuxury: action,
-      setRating: action,
-    });
-  }
-
-  // Add actions to modify the state
-  setBrandName(value: string) {
-    this.name = value;
-  }
-
-  setBrandCreator(value: string) {
-    this.creator = value;
-  }
-
-  setStartingDate(value: Dayjs) {
-    this.year = value.year();
-  }
-
-  setLuxury(value: boolean) {
-    this.luxury = value;
-  }
-
-  setRating(value: number) {
-    this.rating = value;
-  }
+export interface ProductInputState {
+  dropID: number,
+  brandID: number,
+  name: string,
+  price: number,
+  material: string,
+  category: string,
+  color: string
 }
 export class ErrorType {
   error=false;

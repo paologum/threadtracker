@@ -4,6 +4,7 @@ import { observer } from 'mobx-react'
 import { useContext } from 'react';
 import GeneralDataGrid from '../elements/GeneralDataGrid';
 import { context } from '../util/index';
+import ProductRowInput from '../elements/ProductRowInput';
 const Products: React.FC= observer (function () {
     const {state, actions} = useContext(context);
     const columns: GridColDef[] = [
@@ -18,6 +19,7 @@ const Products: React.FC= observer (function () {
     ];
     return (
         <div>
+            <ProductRowInput/>
             <div className="centered-container">
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     <Button variant="contained" onClick={async ()=> {

@@ -31,7 +31,7 @@ const BrandTextInput: React.FC = observer(function () {
             id="outlined-required"
             label="Brand Name"
             helperText="Required"
-            defaultValue={name}
+            defaultValue={state.brandInput.name}
             onChange={(e) => {
               actions.setBrandName(e.target.value);
             }}

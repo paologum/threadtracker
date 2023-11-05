@@ -3,7 +3,7 @@ import { observer } from 'mobx-react'
 import { useContext } from 'react';
 import GeneralDataGrid, { rowSelection } from '../elements/GeneralDataGrid';   
 import { context } from '../util/index';
-import BrandTextInput, { error } from '../elements/RowInput'
+import BrandTextInput, { error } from '../elements/BrandRowInput'
 import { ButtonGroup } from '@mui/material';
 import dayjs from 'dayjs';
 import { GridColDef } from '@mui/x-data-grid';
@@ -29,6 +29,15 @@ const Brands: React.FC= observer (function () {
                             year,
                             luxury,
                           } = state.brandInput;
+                          if (name.length == 0) {
+                              error.setError(true);
+                              error.setText("Brand Name must have a value");
+                              return;
+                          } else if (creator.length == 0) {
+                              error.setError(true);
+                              error.setText("Brand Creator must have a value");
+                              return;
+                          }
                         // check if it already exists.
                         // SQL for some reason only accepts 1's and 0's for booleans
                         // So change the boolean to a string of 1 or 0
@@ -51,9 +60,11 @@ const Brands: React.FC= observer (function () {
                     <Button variant="contained" onClick={async ()=> {
                         // console.log(rowSelection.rowIDs);
                         actions.deleteBrand(rowSelection.rowIDs);
+                        error.setNormal();
                     }}>Delete</Button>
                     <Button variant="contained" onClick={async ()=> {
                         actions.resetBrands();
+                        error.setNormal();
                     }}>Reset</Button>
                 </ButtonGroup>
             </div>
