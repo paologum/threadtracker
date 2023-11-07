@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import GeneralDataGrid, { rowSelection } from '../elements/GeneralDataGrid';
 import { context } from '../util/index';
 import ProductRowInput from '../elements/ProductRowInput';
+import * as generalQueries from '../util/general-queries';
 const Products: React.FC= observer (function () {
     const {state, actions} = useContext(context);
     const columns: GridColDef[] = [
@@ -23,13 +24,13 @@ const Products: React.FC= observer (function () {
             <div className="centered-container">
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     <Button variant="contained" onClick={async ()=> {
-                        actions.createRow('products', state.productInput);
+                        generalQueries.createRow('products', state.productInput);
                     }}>Add</Button>
                     <Button variant="contained" onClick={async ()=> {
-                        actions.deleteRow('products', 'productID', rowSelection.rowIDs)
+                        generalQueries.deleteRow('products', 'productID', rowSelection.rowIDs)
                     }}>Delete</Button>
                     <Button variant="contained" onClick={async ()=> {
-                        actions.resetAll('products');
+                        generalQueries.resetAll('products');
                     }}>Reset</Button>
                 </ButtonGroup>
             </div>

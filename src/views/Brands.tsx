@@ -7,6 +7,8 @@ import BrandTextInput, { error } from '../elements/BrandRowInput'
 import { ButtonGroup } from '@mui/material';
 import dayjs from 'dayjs';
 import { GridColDef } from '@mui/x-data-grid';
+import * as brandQueries from '../util/brand-queries';
+import * as generalQueries from '../util/general-queries';
 const columns: GridColDef[] = [
   { field: 'brandID', headerName: 'ID', width: 70 },
   { field: 'name', headerName: 'Brand Name', width: 130 },
@@ -41,7 +43,7 @@ const Brands: React.FC= observer (function () {
                         // check if it already exists.
                         // SQL for some reason only accepts 1's and 0's for booleans
                         // So change the boolean to a string of 1 or 0
-                        const find = await actions.findBrand({
+                        const find = await brandQueries.findBrand({
                             name: name,
                             creator: creator,
                             year: dayjs().set('year', year).year().toString(),
@@ -52,18 +54,18 @@ const Brands: React.FC= observer (function () {
                             error.setError(true);
                             error.setText("Brand already exists");
                         } else {
-                            actions.createRow("brands", state.brandInput);
+                            generalQueries.createRow("brands", state.brandInput);
                             error.setNormal();
                         }
 
                     }}>Add</Button>
                     <Button variant="contained" onClick={async ()=> {
                         // console.log(rowSelection.rowIDs);
-                        actions.deleteBrand(rowSelection.rowIDs);
+                        generalQueries.deleteRow('brands', 'brandID', rowSelection.rowIDs);
                         error.setNormal();
                     }}>Delete</Button>
                     <Button variant="contained" onClick={async ()=> {
-                        actions.resetAll('brands');
+                        generalQueries.resetAll('brands');
                         error.setNormal();
                     }}>Reset</Button>
                 </ButtonGroup>
