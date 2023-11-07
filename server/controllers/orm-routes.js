@@ -97,3 +97,24 @@ exports.reset = (req, res) => {
             res.json({ message: `There was an error reseting ${tablename}: ${err}` })
     })
 }
+
+exports.find = (req, res) => {
+    const tablename = req.params.tablename;
+    const props = req.query;
+    const model = processTableName(tablename);
+    if (!model) {
+        res.json({message: `model: ${tablename} doesn't exist`});
+        return;
+    }
+    console.log("props", props);
+    model
+        .query()
+        .where(props)
+        .then((found) => {
+            console.log(found);
+            res.json(found);
+        })
+        .catch(err => {
+            res.json({message: `Error finding row with ${props} on ${tablename}: ${err}`})
+        })
+}

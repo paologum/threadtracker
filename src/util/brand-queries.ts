@@ -29,10 +29,10 @@ export const resetBrands = action("resetBrands", async () => {
     }
 })
 
-export const findBrand = action("findBrand", async (brand: {name: string, creator: string, year: string, luxury: string,}) => {
+export const findBrand = action("findBrand", async (table: string, brand: any) => {
     const url = new URLSearchParams(brand).toString();
     try {
-        const response = await fetcher(`${requests.findBrand}?${url}`,{
+        const response = await fetcher(`${requests.findBrand}/${table}?${url}`,{
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',

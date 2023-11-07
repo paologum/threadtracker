@@ -4,7 +4,7 @@ const requests = {
     addBrand: router + '/addBrand',
     deleteBrand: router + '/deleteBrand',
     resetBrand: router + '/resetBrands',
-    findBrand: router + '/findBrand',
+    findBrand: router + '/find',
     getAll: router + '/getAll',
     createRow: router + '/createRow',
     delete: router + '/delete',
