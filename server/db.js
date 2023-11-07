@@ -3,6 +3,7 @@ const path = require('path')
 
 // Get the location of database.sqlite file
 const dbPath = path.resolve(__dirname, 'db/database.sqlite')
+const { Model } = require('objection');
 
 // Create connection to SQLite database
 const knex = require('knex')({
@@ -18,6 +19,7 @@ const knex = require('knex')({
     return next();
   },
 })
+Model.knex(knex);
 
 // Create a table in the database called "brands"
 knex.schema
@@ -80,4 +82,4 @@ knex.schema
     })
 
 // Export the database
-module.exports = knex
+module.exports = { knex, Model }

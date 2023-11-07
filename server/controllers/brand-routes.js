@@ -69,6 +69,7 @@ exports.brandReset = async (req, res) => {
 
 exports.findBrand = async(req, res) => {
   console.log('Received payload for findBrand: ', req.query);
+  try {
   knex
     .select('*')
     .from('brands')
@@ -82,4 +83,7 @@ exports.findBrand = async(req, res) => {
     .then((brand) => {
       res.json(brand)
     })
+  } catch (e) {
+    res.json({ message: `Error finding brand with error: ${e}`})
+  }
 }

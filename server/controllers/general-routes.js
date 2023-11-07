@@ -40,10 +40,6 @@ exports.createRow = (req, res) => {
   // Add new brand to database
   knex(req.params.tablename)
     .insert(contents)
-    .then(() => {
-      // Send a success message in response
-      res.json({ message: `Brand \'${contents.name}\' by ${contents.creator} created.` })
-    })
     .catch(err => {
       // Send a error message in response
       res.json({ message: `There was an error creating ${contents.name} brand: ${err}` })
