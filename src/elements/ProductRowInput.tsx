@@ -1,4 +1,5 @@
-import { Checkbox, FormControl, FormControlLabel, FormHelperText, FormLabel, Rating, TextField, Typography } from "@mui/material";
+import { Checkbox, FormControl, FormControlLabel, FormHelperText, FormLabel, InputAdornment, InputLabel, OutlinedInput, Rating, TextField, Typography } from "@mui/material";
+import { NumberInputRootSlotProps } from "@mui/material/node_modules/@mui/base";
 import { Box } from "@mui/system";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -64,6 +65,25 @@ const ProductRowInput: React.FC = observer(function () {
               actions.setProductColor(e.target.value);
             }}
           />
+            <FormControl sx={{ m: 1 }}>
+                <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+                <OutlinedInput
+                    id="outlined-adornment-amount"
+                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                    label="Amount"
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        let num: number = parseInt(value);
+                        if (value.length != 0 && isNaN(num)) {
+                            error.setError(true);
+                            error.setText("Amount is not a valid number");
+                        } else {
+                            actions.setProductPrice(num);
+                            error.setNormal();
+                        }
+                    }}
+                />
+            </FormControl>
         </div>
         <FormHelperText>{error.text}</FormHelperText>
       </FormControl>
