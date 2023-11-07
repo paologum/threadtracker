@@ -20,10 +20,11 @@ export class RowSelection {
 interface GeneralDataGridProps {
   rows: any[];
   columns: GridColDef[];
+  rowID: string;
 }
 
 export const rowSelection = new RowSelection();
-const GeneralDataGrid: React.FC<GeneralDataGridProps> = ({ rows, columns }) => {
+const GeneralDataGrid: React.FC<GeneralDataGridProps> = ({ rows, columns, rowID }) => {
     return (
       <div style={{ height: 400, width: '100%', color: 'light black' }}>
       <DataGrid
@@ -44,7 +45,7 @@ const GeneralDataGrid: React.FC<GeneralDataGridProps> = ({ rows, columns }) => {
         pageSizeOptions={[5, 10]}
         checkboxSelection
         onRowSelectionModelChange={(callback, details) => rowSelection.setRowIDs(callback)}
-        getRowId={(row) => row.brandID}
+        getRowId={(row) => row[rowID]}
       />
     </div>
     );

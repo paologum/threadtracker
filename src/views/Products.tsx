@@ -8,14 +8,14 @@ import ProductRowInput from '../elements/ProductRowInput';
 const Products: React.FC= observer (function () {
     const {state, actions} = useContext(context);
     const columns: GridColDef[] = [
-        { field: 'productID', headerName: 'ID', width: 70 },
-        { field: 'dropID', headerName: 'Drop ID', type: 'number', width: 130 },
-        { field: 'brandID', headerName: 'Brand ID', type: 'number', width: 130 },
+        { field: 'productID', headerName: 'ID', width: 20 },
+        { field: 'dropID', headerName: 'Drop ID', type: 'number', width: 80 },
+        { field: 'brandID', headerName: 'Brand ID', type: 'number', width: 80 },
         { field: 'name', headerName: 'Product Name', width: 120 },
         { field: 'price', headerName: 'Price', type: 'number', width: 130 },
-        { field: 'material', headerName: 'Material',  width: 60 },
-        { field: 'category', headerName: 'Category',  width: 60 },
-        { field: 'color', headerName: 'Color',  width: 60 },
+        { field: 'material', headerName: 'Material',  width: 130 },
+        { field: 'category', headerName: 'Category',  width: 130 },
+        { field: 'color', headerName: 'Color',  width: 130 },
     ];
     return (
         <div>
@@ -23,14 +23,16 @@ const Products: React.FC= observer (function () {
             <div className="centered-container">
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     <Button variant="contained" onClick={async ()=> {
+                        actions.createRow('products', state.productInput);
                     }}>Add</Button>
                     <Button variant="contained" onClick={async ()=> {
                     }}>Delete</Button>
                     <Button variant="contained" onClick={async ()=> {
+                        actions.resetAll('products');
                     }}>Reset</Button>
                 </ButtonGroup>
             </div>
-            <GeneralDataGrid rows={state.products} columns={columns}/>
+            <GeneralDataGrid rows={state.products} columns={columns} rowID="productID"/>
         </div>
     )});
 export default Products;

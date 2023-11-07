@@ -88,6 +88,17 @@ export const resetBrands = action("resetBrands", async () => {
         console.log('Error resetting brands with error: ', error);
     }
 })
+export const resetAll = action("resetAll", async (table: string) => {
+    const url = new URLSearchParams({table: table}).toString();
+    try {
+        await fetcher(`${requests.resetAll}?${url}`,{
+            method: "PUT",
+        });
+        await getAll(table);
+    } catch (error) {
+        console.log('Error resetting brands with error: ', error);
+    }
+})
 
 export const findBrand = action("findBrand", async (brand: {name: string, creator: string, year: string, luxury: string,}) => {
     const url = new URLSearchParams(brand).toString();

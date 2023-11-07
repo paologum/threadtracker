@@ -4,7 +4,6 @@ import { Brand, Product } from '../../shared/types';
 import { BrandInputState, Page, ProductInputState } from './types';
 export type State =  {
     brands: Brand[];
-    page: Page;
     products: Product[];
     brandInput: BrandInputState;
     productInput: ProductInputState;
@@ -12,10 +11,6 @@ export type State =  {
 
 export const state = observable<State>( {
     brands: [],
-    page: {
-        name:'Home',
-        path:'/home'
-    },
     products: [],
     brandInput: {
         name: "",

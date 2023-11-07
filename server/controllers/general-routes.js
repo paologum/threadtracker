@@ -2,7 +2,7 @@ const knex = require('../db');
 
 // Retrieve all brands
 exports.getAll = (req, res) => {
-  // console.log("Received getAll payload: ", req.query.table)
+  console.log("Received getAll payload: ", req.query.table)
   knex
     .select('*') // select all records
     .from(req.query.table) // from queried table
@@ -13,6 +13,21 @@ exports.getAll = (req, res) => {
     .catch(err => {
       // Send a error message in response
       res.json({ message: `There was an error retrieving brands: ${err}` })
+    })
+}
+exports.resetAll = (req, res) => {
+  console.log("Received resetAll payload: ", req.query.table)
+  knex
+    .select('*') // select all records
+    .from(req.query.table) // from queried table
+    .truncate()
+    .then(() => {
+      // console.log("items: ", items);
+      res.json({message: `${req.query.table} list cleared.`});
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error reseting ${req.query.table}: ${err}` })
     })
 }
 
@@ -34,3 +49,4 @@ exports.createRow = (req, res) => {
       res.json({ message: `There was an error creating ${contents.name} brand: ${err}` })
     })
 }
+

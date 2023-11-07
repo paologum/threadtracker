@@ -1,9 +1,5 @@
 import { Checkbox, FormControl, FormControlLabel, FormHelperText, FormLabel, InputAdornment, InputLabel, OutlinedInput, Rating, TextField, Typography } from "@mui/material";
-import { NumberInputRootSlotProps } from "@mui/material/node_modules/@mui/base";
 import { Box } from "@mui/system";
-import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs from "dayjs";
 import { observer } from "mobx-react";
 import { useContext } from "react";
 import { context, actions } from "../util";
