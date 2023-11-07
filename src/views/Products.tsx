@@ -6,6 +6,10 @@ import GeneralDataGrid, { rowSelection } from '../elements/GeneralDataGrid';
 import { context } from '../util/index';
 import ProductRowInput from '../elements/ProductRowInput';
 import * as generalQueries from '../util/general-queries';
+import { State } from '../util/state';
+async function add(state: State) {
+    generalQueries.createRow('products', state.productInput);
+}
 const Products: React.FC= observer (function () {
     const {state, actions} = useContext(context);
     const columns: GridColDef[] = [
@@ -24,7 +28,7 @@ const Products: React.FC= observer (function () {
             <div className="centered-container">
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     <Button variant="contained" onClick={async ()=> {
-                        generalQueries.createRow('products', state.productInput);
+                        add(state)
                     }}>Add</Button>
                     <Button variant="contained" onClick={async ()=> {
                         generalQueries.deleteRow('products', 'productID', rowSelection.rowIDs)
