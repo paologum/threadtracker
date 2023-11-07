@@ -2,7 +2,7 @@ import { Button, ButtonGroup } from '@mui/material';
 import { GridColDef } from '@mui/x-data-grid';
 import { observer } from 'mobx-react' 
 import { useContext } from 'react';
-import GeneralDataGrid from '../elements/GeneralDataGrid';
+import GeneralDataGrid, { rowSelection } from '../elements/GeneralDataGrid';
 import { context } from '../util/index';
 import ProductRowInput from '../elements/ProductRowInput';
 const Products: React.FC= observer (function () {
@@ -26,6 +26,7 @@ const Products: React.FC= observer (function () {
                         actions.createRow('products', state.productInput);
                     }}>Add</Button>
                     <Button variant="contained" onClick={async ()=> {
+                        actions.deleteRow('products', 'productID', rowSelection.rowIDs)
                     }}>Delete</Button>
                     <Button variant="contained" onClick={async ()=> {
                         actions.resetAll('products');

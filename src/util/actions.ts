@@ -4,6 +4,7 @@ import { Brand, Product } from '../../shared/types'
 import { useNavigate } from 'react-router-dom';
 import requests from './constants';
 import { BrandInputState } from './types';
+import { RowSelection } from '../elements/GeneralDataGrid';
 // If you are running in dev mode, prefix URL's with the dev server URL:
 
 const devurl = "http://localhost:3000";
@@ -60,7 +61,7 @@ export const getAll = action("getAll", async (table: string) => {
         }
         console.log("response: ", data);
     } catch (error) {
-        console.log("Error getting brands with error: ", error)
+        console.log("Error getting all with error: ", error)
 
     }
 });
@@ -75,7 +76,7 @@ export const deleteBrand = action("deleteBrand", async (ids: number[]) => {
         });
         await getAll("brands");
     } catch (error) {
-        console.log('Error resetting brands with error: ', error);
+        console.log('Error deleting brands with error: ', error);
     }
 })
 export const resetBrands = action("resetBrands", async () => {
@@ -96,7 +97,7 @@ export const resetAll = action("resetAll", async (table: string) => {
         });
         await getAll(table);
     } catch (error) {
-        console.log('Error resetting brands with error: ', error);
+        console.log('Error resetting all with error: ', error);
     }
 })
 
@@ -147,7 +148,23 @@ export const createRow = action("createRow", async(table: string, row: any) => {
         await getAll(table);
         console.log("response: ", await response.json());
     } catch (error) {
-        console.log("Error adding brands with error: ", error)
+        console.log("Error creating rows with error: ", error)
+    }
+})
+export const deleteRow = action("deleteRow", async (table: string, idProp: string, rows: number[]) => {
+    const body = JSON.stringify({ids: rows});
+    try {
+        const response = await fetcher(`${requests.delete}/${table}/${idProp}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+              },
+            body: body
+        });
+        await getAll(table);
+        console.log("response: ", await response.json());
+    } catch (error) {
+        console.log("Error deleting row with error: ", error)
     }
 })
 export const setBrands = action("setBrands", (brands: Brand[]) => {

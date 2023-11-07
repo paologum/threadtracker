@@ -50,3 +50,20 @@ exports.createRow = (req, res) => {
     })
 }
 
+exports.delete = async (req, res) => {
+  // Find specific brand in the database and remove it
+  console.log('Received params: ', req.params.tablename, req.params.id)
+  console.log('Received payload: ', req.body);
+  knex(req.params.tablename)
+    .whereIn(req.params.id, req.body.ids) // find correct record based on id
+    .del() // delete the record
+    .then(() => {
+      // Send a success message in response
+      res.json({ message: `${req.params.id} ${req.body.ids} deleted.` })
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error deleting ${req.body.id} ${req.parms.tablename}: ${err}` })
+    })
+}
+

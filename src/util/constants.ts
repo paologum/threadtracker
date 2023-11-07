@@ -6,6 +6,7 @@ const requests = {
     resetBrand: router + '/resetBrands',
     findBrand: router + '/findBrand',
     getAll: router + '/getAll',
-    createRow: router + '/createRow'
+    createRow: router + '/createRow',
+    delete: router + '/delete',
 }
 export default requests;

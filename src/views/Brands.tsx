@@ -63,7 +63,7 @@ const Brands: React.FC= observer (function () {
                         error.setNormal();
                     }}>Delete</Button>
                     <Button variant="contained" onClick={async ()=> {
-                        actions.resetBrands();
+                        actions.resetAll('brands');
                         error.setNormal();
                     }}>Reset</Button>
                 </ButtonGroup>
