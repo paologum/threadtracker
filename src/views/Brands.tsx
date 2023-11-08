@@ -37,10 +37,12 @@ async function add(state: State) {
     // check if it already exists.
     // SQL for some reason only accepts 1's and 0's for booleans
     // So change the boolean to a string of 1 or 0
-    const find = await brandQueries.findBrand("brands", {
+    const find = await generalQueries.find("brands", {
         name: name,
         creator: creator,
         year: dayjs().set('year', year).year().toString(),
+        // luxury is stored in input as a boolean
+        // if ever receiving from server, need to reformat to true and false
         luxury: luxury ? "1" : "0",
     });
     // if we find something in the database that matches, do not create a brand

@@ -30,6 +30,7 @@ export const getAll = action("getAll", async (table: string) => {
                 setProducts(data as Product[])
                 break;
             }
+            //TODO do drops, collaborators, etc
         }
         console.log("response: ", data);
     } catch (error) {
@@ -81,5 +82,21 @@ export const resetAll = action("resetAll", async (table: string) => {
         await getAll(table);
     } catch (error) {
         console.log('Error resetting all with error: ', error);
+    }
+})
+export const find = action("find", async (table: string, props: any) => {
+    const url = new URLSearchParams(props).toString();
+    try {
+        const response = await fetcher(`${requests.findBrand}/${table}?${url}`,{
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+              },
+        });
+        const found = await response.json()
+        console.log(found);
+        return found;
+    } catch (error) {
+        console.log('Error finding brands with error: ', error);
     }
 })

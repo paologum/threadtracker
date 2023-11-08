@@ -1,4 +1,4 @@
-import { Checkbox, FormControl, FormControlLabel, FormHelperText, FormLabel, InputAdornment, InputLabel, OutlinedInput, Rating, TextField, Typography } from "@mui/material";
+import { Checkbox, FormControl, FormControlLabel, FormHelperText, FormLabel, InputAdornment, InputLabel, MenuItem, OutlinedInput, Rating, Select, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { observer } from "mobx-react";
 import { useContext } from "react";
@@ -21,6 +21,27 @@ const ProductRowInput: React.FC = observer(function () {
     <FormControl required error={error.error} sx={{ m: 1 }} component="fieldset" variant="standard">
         <FormLabel component="legend">Create Product</FormLabel>
         <div>
+          <FormControl sx={{ m: 1, minWidth: 200 }} size="medium">
+            <InputLabel id="demo-select-small-label" variant="standard" htmlFor="uncontrolled-native">Brand</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-small"
+              value={state.productInput.brandID}
+              label="Brands"
+              onChange={(event) => {
+                actions.setProductBrand(event.target.value as number);
+              }}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {state.brands.map((brand, index) => (
+                <MenuItem key={brand.brandID}value={brand.brandID}>
+                  {brand.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <TextField
             required
             id="outlined-required"

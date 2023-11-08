@@ -8,6 +8,7 @@ import ProductRowInput from '../elements/ProductRowInput';
 import * as generalQueries from '../util/general-queries';
 import { State } from '../util/state';
 async function add(state: State) {
+    //TODO add input checking.
     generalQueries.createRow('products', state.productInput);
 }
 const Products: React.FC= observer (function () {

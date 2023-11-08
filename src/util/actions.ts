@@ -63,3 +63,6 @@ export const setProductCategory = action("setProductCategory", (value: string) =
 export const setProductColor = action("setProductColor", (value: string) => {
     state.productInput.color=value;
 })
+export const setProductBrand = action("setProductBrand", (value: number) => {
+    state.productInput.brandID=value;
+})
