@@ -1,7 +1,6 @@
 import React from 'react';
 import './GeneralDataGrid.css'
-import { DataGrid, GridColDef, GridRowSelectionModel, GridValueGetterParams } from '@mui/x-data-grid';
-import { Brand } from '../../shared/types' 
+import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
 import { action, makeObservable, observable } from 'mobx';
 
 export class RowSelection {

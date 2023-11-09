@@ -1,8 +1,9 @@
+import { Dayjs } from "dayjs";
 export interface Brand {
   brandID: number;
   name: string;
   creator: string;
-  startingDate: number;
+  year: number;
   luxury: string;
   rating: number;
   // Other properties...
@@ -16,4 +17,12 @@ export interface Product {
   material: string;
   category: string;
   color: string;
+}
+export interface Drop {
+  dropID: number,
+  brandID: number,
+  name: string,
+  date: Dayjs,
+  season: string,
+  collaboratorID: number
 }

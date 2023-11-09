@@ -5,6 +5,7 @@ export interface Page {
     name: string,
     path: string
 }
+// this is the deprecated brand without the id
 export interface BrandInputState {
     name: string,
     creator: string,
@@ -12,6 +13,7 @@ export interface BrandInputState {
     luxury: boolean,
     rating: number
 }
+// this is the deprecated product without the id
 export interface ProductInputState {
   dropID: number,
   brandID: number,
@@ -20,6 +22,14 @@ export interface ProductInputState {
   material: string,
   category: string,
   color: string
+}
+
+export interface DropInputState {
+  brandID: number,
+  name: string,
+  date: Dayjs,
+  season: string,
+  collaboratorID: number
 }
 export class ErrorType {
   error=false;

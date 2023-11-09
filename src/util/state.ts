@@ -1,17 +1,20 @@
 import dayjs, { Dayjs } from 'dayjs';
 import { observable } from 'mobx';
-import { Brand, Product } from '../../shared/types';
-import { BrandInputState, Page, ProductInputState } from './types';
+import { Brand, Product, Drop } from '../../shared/types';
+import { BrandInputState, DropInputState, ProductInputState } from './types';
 export type State =  {
     brands: Brand[];
     products: Product[];
+    drops: Drop[];
     brandInput: BrandInputState;
     productInput: ProductInputState;
+    dropInput: DropInputState;
 }
 
 export const state = observable<State>( {
     brands: [],
     products: [],
+    drops: [],
     brandInput: {
         name: "",
         creator: "",
@@ -27,6 +30,13 @@ export const state = observable<State>( {
         material: "",
         category: "",
         color: ""
+    },
+    dropInput: {
+        brandID: 0,
+        name: "",
+        date: dayjs(),
+        season: "",
+        collaboratorID: 0
     }
 },
 )
