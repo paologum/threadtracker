@@ -34,7 +34,7 @@ export const state = observable<State>( {
     dropInput: {
         brandID: 0,
         name: "",
-        date: dayjs(),
+        date: dayjs().format('MM/DD/YYYY'),
         season: "",
         collaboratorID: 0
     }

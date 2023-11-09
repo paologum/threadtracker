@@ -27,7 +27,7 @@ export interface ProductInputState {
 export interface DropInputState {
   brandID: number,
   name: string,
-  date: Dayjs,
+  date: string,
   season: string,
   collaboratorID: number
 }

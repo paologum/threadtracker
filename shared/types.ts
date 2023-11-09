@@ -1,4 +1,3 @@
-import { Dayjs } from "dayjs";
 export interface Brand {
   brandID: number;
   name: string;
@@ -22,7 +21,7 @@ export interface Drop {
   dropID: number,
   brandID: number,
   name: string,
-  date: Dayjs,
+  date: string,
   season: string,
   collaboratorID: number
 }

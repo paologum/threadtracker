@@ -1,6 +1,6 @@
 import { action } from "mobx";
-import { Brand, Product } from "../../shared/types";
-import { fetcher, setBrands, setProducts } from "./actions";
+import { Brand, Drop, Product } from "../../shared/types";
+import { fetcher, setBrands, setDrops, setProducts } from "./actions";
 import requests from "./constants";
 
 export const getAll = action("getAll", async (table: string) => {
@@ -23,11 +23,15 @@ export const getAll = action("getAll", async (table: string) => {
                 content.map((row, index) => {
                     row.luxury = row.luxury ? "Yes" : "No"
                 })
-                setBrands(data as Brand[])
+                setBrands(content)
                 break;
             }
             case "products": {
                 setProducts(data as Product[])
+                break;
+            }
+            case "drops": {
+                setDrops(data as Drop[])
                 break;
             }
             //TODO do drops, collaborators, etc

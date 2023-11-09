@@ -39,7 +39,7 @@ knex.schema
           console.log('Table \'Brands\' created')
         })
         .catch((error) => {
-          console.error(`There was an error creating table: ${error}`)
+          console.error(`There was an error creating table brands: ${error}`)
         })
       }
     })
@@ -69,7 +69,35 @@ knex.schema
           console.log('Table \'Products\' created')
         })
         .catch((error) => {
-          console.error(`There was an error creating table: ${error}`)
+          console.error(`There was an error creating table products: ${error}`)
+        })
+      }
+    })
+    .then(() => {
+      // Log success message
+      console.log('done')
+    })
+    .catch((error) => {
+      console.error(`There was an error setting up the database: ${error}`)
+    })
+knex.schema
+  .hasTable('drops')
+    .then((exists) => {
+      if (!exists) {
+        return knex.schema.createTable('drops', (table)  => {
+          table.increments('dropID').primary()
+          table.integer('brandID')
+          table.string('name')
+          table.string('date')
+          table.string('season')
+          table.integer('collaboratorID')
+        })
+        .then(() => {
+          // Log success message
+          console.log('Table \'drops\' created')
+        })
+        .catch((error) => {
+          console.error(`There was an error creating table drops: ${error}`)
         })
       }
     })

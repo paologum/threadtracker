@@ -1,9 +1,9 @@
 const Brand = require('./Brand');
 const Product = require('./Product');
-// Import other models here...
+const Drop = require('./Drop');
 
 module.exports = {
   Brand,
   Product,
-  // Export other models here...
+  Drop
 };

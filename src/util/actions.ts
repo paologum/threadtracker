@@ -1,6 +1,6 @@
 import { action } from 'mobx'
 import { state } from './state'
-import { Brand, Product } from '../../shared/types' 
+import { Brand, Drop, Product } from '../../shared/types' 
 import { Dayjs } from 'dayjs';
 // If you are running in dev mode, prefix URL's with the dev server URL:
 
@@ -33,6 +33,9 @@ export const setBrands = action("setBrands", (brands: Brand[]) => {
 })
 export const setProducts = action("setProducts", (products: Product[]) => {
     state.products = products;
+})
+export const setDrops = action("setDrops", (drops: Drop[]) => {
+    state.drops = drops;
 })
 export const setBrandName = action("setBrandName", (value: string) => {
     state.brandInput.name=value;
@@ -74,7 +77,7 @@ export const setDropName = action("setDropName", (value: string) => {
     state.dropInput.name=value;
 })
 export const setDropDate = action("setDropDate", (value: Dayjs) => {
-    state.dropInput.date=value;
+    state.dropInput.date=value.format('MM/DD/YYYY');
 })
 export const setDropSeason= action("setDropBrand", (value: string) => {
     state.dropInput.season=value;

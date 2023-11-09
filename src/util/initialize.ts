@@ -6,6 +6,7 @@ export async function initialize() {
     try {
       generalQueries.getAll('brands');
       generalQueries.getAll('products');
+      generalQueries.getAll('drops');
       console.log('Brands loaded');
     } catch(e: any) {
       console.log('FAILED to retrieve presets.  Error was: ', e);
