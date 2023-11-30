@@ -10,7 +10,6 @@ export interface Brand {
 export interface Product {
   productID: number;
   dropID: number;
-  brandID: number;
   name: string;
   price: number;
   material: string;

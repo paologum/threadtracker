@@ -16,7 +16,6 @@ const Products: React.FC= observer (function () {
     const columns: GridColDef[] = [
         { field: 'productID', headerName: 'ID', width: 20 },
         { field: 'dropID', headerName: 'Drop ID', type: 'number', width: 80 },
-        { field: 'brandID', headerName: 'Brand ID', type: 'number', width: 80 },
         { field: 'name', headerName: 'Product Name', width: 120 },
         { field: 'price', headerName: 'Price', type: 'number', width: 130 },
         { field: 'material', headerName: 'Material',  width: 130 },

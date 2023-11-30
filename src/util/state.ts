@@ -24,7 +24,6 @@ export const state = observable<State>( {
     },
     productInput: {
         dropID: 0,
-        brandID: 0,
         name: "",
         price: 0,
         material: "",

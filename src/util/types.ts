@@ -16,7 +16,6 @@ export interface BrandInputState {
 // this is the deprecated product without the id
 export interface ProductInputState {
   dropID: number,
-  brandID: number,
   name: string,
   price: number,
   material: string,

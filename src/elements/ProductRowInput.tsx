@@ -22,22 +22,22 @@ const ProductRowInput: React.FC = observer(function () {
         <FormLabel component="legend">Create Product</FormLabel>
         <div>
           <FormControl sx={{ m: 1, minWidth: 200 }} size="medium">
-            <InputLabel id="demo-select-small-label" variant="standard" htmlFor="uncontrolled-native">Brand</InputLabel>
+            <InputLabel id="demo-select-small-label" variant="standard" htmlFor="uncontrolled-native">Drop</InputLabel>
             <Select
               labelId="demo-select-small-label"
               id="demo-select-small"
-              value={state.productInput.brandID}
-              label="Brands"
+              value={state.productInput.dropID}
+              label="Drop"
               onChange={(event) => {
-                actions.setProductBrand(event.target.value as number);
+                actions.setProductDrop(event.target.value as number);
               }}
             >
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              {state.brands.map((brand, index) => (
-                <MenuItem key={brand.brandID}value={brand.brandID}>
-                  {brand.name}
+              {state.drops.map((drop, index) => (
+                <MenuItem key={drop.dropID}value={drop.dropID}>
+                  {drop.name}
                 </MenuItem>
               ))}
             </Select>
