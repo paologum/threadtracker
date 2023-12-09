@@ -27,10 +27,10 @@ knex.schema
     .then((exists) => {
       if (!exists) {
         return knex.schema.createTable('brands', (table)  => {
-          table.increments('brandID').primary()
-          table.string('name')
+          table.increments('brandID').primary().index('brands_brandID_index')
+          table.string('name').index('brands_name_index')
           table.string('creator')
-          table.integer('year')
+          table.integer('year').index('brand_year_index')
           table.boolean('luxury')
           table.integer('rating')
         })
@@ -58,8 +58,8 @@ knex.schema
           table.increments('productID').primary()
           table.integer('dropID')
           table.integer('brandID')
-          table.string('name')
-          table.integer('price')
+          table.string('name').index('product_name_index')
+          table.integer('price').index('product_price_index')
           table.string('material')
           table.string('category')
           table.string('color')
@@ -87,8 +87,8 @@ knex.schema
         return knex.schema.createTable('drops', (table)  => {
           table.increments('dropID').primary()
           table.integer('brandID')
-          table.string('name')
-          table.string('date')
+          table.string('name').index('drops_name_index')
+          table.string('date').index('drop_date_index')
           table.string('season')
           table.integer('collaboratorID')
         })

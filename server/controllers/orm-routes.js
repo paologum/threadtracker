@@ -3,6 +3,7 @@ const models = require('../models');
 const { tableName } = require('../models/Brand');
 
 function processTableName(value) {
+    // Convert table name to model name convention (e.g., 'brands' to 'Brand')
     let table = value.charAt(0).toUpperCase() + value.slice(1, -1)
     return models[table];
 }
@@ -10,13 +11,8 @@ function processTableName(value) {
 // A general function to get all records from any table
 exports.getAllRecords = async (req, res) => {
     console.log("Received getAllRecords payload: ", req.query.table)
-    // Convert table name to model name convention (e.g., 'brands' to 'Brand')
     const tablename = req.query.table;
     const model = processTableName(tablename); // Removes 's' assuming plural table names and models are singular
-
-    // Get the model class from the models object
-    // console.log("models: ", models)
-
     // Use the model to query all records
     if (!model) {
         res.json({message: `model: ${tablename} doesn't exist`});
