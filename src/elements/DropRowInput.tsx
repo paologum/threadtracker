@@ -26,17 +26,15 @@ const DropRowInput: React.FC = observer(function () {
         <FormLabel component="legend">Create Drop</FormLabel>
         <div>
           <FormControl sx={{ m: 1, minWidth: 200 }} size="medium">
-            <InputLabel id="demo-select-small-label" variant="standard" htmlFor="uncontrolled-native">Brand</InputLabel>
+            <InputLabel htmlFor="uncontrolled-native">Brand</InputLabel>
             <Select
-              labelId="demo-select-small-label"
-              id="demo-select-small"
               value={state.dropInput.brandID}
               label="Brands"
               onChange={(event) => {
                 actions.setDropBrand(event.target.value as number);
               }}
             >
-              <MenuItem value="">
+              <MenuItem value="0">
                 <em>None</em>
               </MenuItem>
               {state.brands.map((brand, index) => (
@@ -59,7 +57,6 @@ const DropRowInput: React.FC = observer(function () {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker 
             value={dayjs(state.dropInput.date)}
-            views={['year']}
             slotProps={{
               textField: {
                 helperText: 'MM/DD/YYYY',
@@ -70,16 +67,23 @@ const DropRowInput: React.FC = observer(function () {
             }}
             label="Released"/>
             </LocalizationProvider>
-          <TextField
-            required
-            id="outlined-required"
-            label="Season"
-            helperText="Required"
-            defaultValue={state.dropInput.season}
-            onChange={(e) => {
-              actions.setDropSeason(e.target.value);
-            }}
-          />
+          <FormControl sx={{ m: 1, minWidth: 200 }} size="medium">
+            <InputLabel htmlFor="uncontrolled-native">Season</InputLabel>
+            <Select
+              value={state.dropInput.season}
+              label="Season"
+              onChange={(event) => {
+                actions.setDropSeason(event.target.value as string);
+              }}
+            >
+              <MenuItem value="Spring/Summer">
+                <em>Spring/Summer</em>
+              </MenuItem>
+              <MenuItem value="Fall/Winter">
+                <em>Fall/Winter</em>
+              </MenuItem>
+            </Select>
+          </FormControl>
         </div>
         <FormHelperText>{error.text}</FormHelperText>
       </FormControl>

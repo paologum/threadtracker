@@ -35,7 +35,6 @@ export const state = observable<State>( {
         name: "",
         date: dayjs().format('MM/DD/YYYY'),
         season: "",
-        collaboratorID: 0
-    }
+        }
 },
 )

@@ -28,7 +28,6 @@ export interface DropInputState {
   name: string,
   date: string,
   season: string,
-  collaboratorID: number
 }
 export class ErrorType {
   error=false;

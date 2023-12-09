@@ -82,6 +82,3 @@ export const setDropDate = action("setDropDate", (value: Dayjs) => {
 export const setDropSeason= action("setDropBrand", (value: string) => {
     state.dropInput.season=value;
 })
-export const setDropCollaborator= action("setDropCollaborator", (value: number) => {
-    state.dropInput.collaboratorID=value;
-})

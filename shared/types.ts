@@ -22,5 +22,4 @@ export interface Drop {
   name: string,
   date: string,
   season: string,
-  collaboratorID: number
 }

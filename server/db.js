@@ -90,7 +90,6 @@ knex.schema
           table.string('name').index('drops_name_index')
           table.string('date').index('drop_date_index')
           table.string('season')
-          table.integer('collaboratorID')
         })
         .then(() => {
           // Log success message

@@ -7,7 +7,6 @@ import BrandTextInput, { error } from '../elements/BrandRowInput'
 import { ButtonGroup } from '@mui/material';
 import dayjs from 'dayjs';
 import { GridColDef } from '@mui/x-data-grid';
-import * as brandQueries from '../util/brand-queries';
 import * as generalQueries from '../util/general-queries';
 import { State } from '../util/state';
 const columns: GridColDef[] = [
