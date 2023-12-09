@@ -22,7 +22,7 @@ const ProductRowInput: React.FC = observer(function () {
         <FormLabel component="legend">Create Product</FormLabel>
         <div>
           <FormControl sx={{ m: 1, minWidth: 200 }} size="medium">
-            <InputLabel id="demo-select-small-label" variant="standard" htmlFor="uncontrolled-native">Drop</InputLabel>
+            <InputLabel htmlFor="uncontrolled-native">Drop</InputLabel>
             <Select
               labelId="demo-select-small-label"
               id="demo-select-small"

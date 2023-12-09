@@ -4,13 +4,9 @@ import { observer } from 'mobx-react'
 import { useContext } from 'react';
 import GeneralDataGrid, { rowSelection } from '../elements/GeneralDataGrid';
 import { context } from '../util/index';
-import ProductRowInput from '../elements/ProductRowInput';
+import ProductRowInput, { error } from '../elements/ProductRowInput';
 import * as generalQueries from '../util/general-queries';
 import { State } from '../util/state';
-async function add(state: State) {
-    //TODO add input checking.
-    generalQueries.createRow('products', state.productInput);
-}
 const Products: React.FC= observer (function () {
     const {state, actions} = useContext(context);
     const columns: GridColDef[] = [
@@ -22,12 +18,62 @@ const Products: React.FC= observer (function () {
         { field: 'category', headerName: 'Category',  width: 130 },
         { field: 'color', headerName: 'Color',  width: 130 },
     ];
+async function add(state: State) {
+    const {
+        dropID,
+        name,
+        price,
+        material,
+        category,
+        color
+    } = state.productInput;
+    if (dropID == 0) {
+        error.setError(true);
+        error.setText("DropID must have a value");
+        return;
+    }
+    if (name.length == 0) {
+        error.setError(true);
+        error.setText("Product Name must have a value");
+        return;
+    }
+    if (price < 0) {
+        error.setError(true);
+        error.setText("Price must have a positive value");
+        return;
+    }
+    if (material.length == 0) {
+        error.setError(true);
+        error.setText("Product must have a type of material");
+        return;
+    }
+    if (category.length == 0) {
+        error.setError(true);
+        error.setText("Product must have a category");
+        return;
+    }
+    const find = await generalQueries.find("products", {
+        name: name,
+        price: price,
+        material: material,
+        category: category,
+        color: color
+    });
+    if (find.length > 0) {
+        error.setError(true);
+        error.setText("Product already exists");
+    } else {
+        generalQueries.createRow("products", state.productInput);
+        error.setNormal();
+    }
+}
     return (
         <div>
             <ProductRowInput/>
             <div className="centered-container">
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     <Button variant="contained" onClick={async ()=> {
+                        // check if valid
                         add(state)
                     }}>Add</Button>
                     <Button variant="contained" onClick={async ()=> {
