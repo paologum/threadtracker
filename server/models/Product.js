@@ -6,14 +6,14 @@ class Product extends Model {
     return 'products';
   }
   static get relationMappings() {
-    const Brand = require('./Brand'); 
+    const Drop = require('./Drop');
     return {
-      brand: {
+      drops: {
         relation: Model.BelongsToOneRelation,
-        modelClass: Brand,
+        modelClass: Drop,
         join: {
           from: 'products.brandID',
-          to: 'brands.brandID'
+          to: 'drops.brandID'
         }
       }
     };

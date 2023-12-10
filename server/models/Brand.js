@@ -6,6 +6,7 @@ class Brand extends Model {
   }
   static get relationMappings() {
     const Product = require('./Product'); // Require the related model here to avoid require loops
+    const Drop = require('./Drop');
     return {
       products: {
         relation: Model.HasManyRelation,
@@ -14,11 +15,17 @@ class Brand extends Model {
           from: 'brands.brandID',
           to: 'products.brandID'
         }
+      },
+      drops: {
+        relation: Model.HasManyRelation,
+        modelClass: Drop,
+        join: {
+          from: 'brands.brandID',
+          to: 'drops.brandID'
+        }
       }
     };
   }
-  // Define any relation mappings if necessary
-  // static relationMappings = { ... };
 }
 
 module.exports = Brand;

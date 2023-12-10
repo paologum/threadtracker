@@ -7,13 +7,22 @@ class Drop extends Model {
   }
   static get relationMappings() {
     const Product = require('./Product'); 
+    const Brand = require('./Brand');
     return {
       products: {
         relation: Model.HasManyRelation,
         modelClass: Product,
         join: {
           from: 'drops.dropID',
-          to: 'products.productID'
+          to: 'products.dropID'
+        }
+      },
+      brands: {
+        relation: Model.HasOneRelation,
+        modelClass: Brand,
+        join: {
+          from: 'drops.brandID',
+          to: 'brands.brandID'
         }
       }
     };
