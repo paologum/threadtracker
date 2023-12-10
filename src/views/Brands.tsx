@@ -6,16 +6,17 @@ import { context } from '../util/index';
 import BrandTextInput, { error } from '../elements/BrandRowInput'
 import { ButtonGroup } from '@mui/material';
 import dayjs from 'dayjs';
-import { GridColDef } from '@mui/x-data-grid';
+import { GridCellEditStopParams, GridColDef } from '@mui/x-data-grid';
 import * as generalQueries from '../util/general-queries';
 import { State } from '../util/state';
+import { editingStateInitializer } from '@mui/x-data-grid/internals';
 const columns: GridColDef[] = [
   { field: 'brandID', headerName: 'ID', width: 70 },
-  { field: 'name', headerName: 'Brand Name', width: 130 },
-  { field: 'creator', headerName: 'Brand Creator', width: 130 },
-  { field: 'year', headerName: 'Founded', width: 120 },
-  { field: 'luxury', headerName: 'Luxury?', width: 130 },
-  { field: 'rating', headerName: 'Rating', type: 'number', width: 60 },
+  { field: 'name', headerName: 'Brand Name', width: 130 , editable: true},
+  { field: 'creator', headerName: 'Brand Creator', width: 130 , editable: true},
+  { field: 'year', headerName: 'Founded', width: 120 , editable: true},
+  { field: 'luxury', headerName: 'Luxury?', width: 130, editable: true},
+  { field: 'rating', headerName: 'Rating', type: 'number', width: 60 , editable: true},
 ];
 async function add(state: State) {
     const {
@@ -75,7 +76,7 @@ const Brands: React.FC= observer (function () {
                     }}>Reset</Button>
                 </ButtonGroup>
             </div>
-            <GeneralDataGrid rows= {state.brands} columns={columns} rowID="brandID"/>
+            <GeneralDataGrid tablename='brands'rows= {state.brands} columns={columns} rowID="brandID"/>
         </div>
     )});
 export default Brands;

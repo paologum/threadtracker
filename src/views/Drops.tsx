@@ -73,7 +73,7 @@ const Drops: React.FC= observer (function () {
                 }}>Reset</Button>
             </ButtonGroup>
         </div>
-        <GeneralDataGrid rows={state.drops} columns={columns} rowID="dropID"/>
+        <GeneralDataGrid tablename='drops' rows={state.drops} columns={columns} rowID="dropID" />
         </div>
     )});
 export default Drops;

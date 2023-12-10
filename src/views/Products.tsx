@@ -84,7 +84,7 @@ async function add(state: State) {
                     }}>Reset</Button>
                 </ButtonGroup>
             </div>
-            <GeneralDataGrid rows={state.products} columns={columns} rowID="productID"/>
+            <GeneralDataGrid tablename='products'rows={state.products} columns={columns} rowID="productID"/>
         </div>
     )});
 export default Products;

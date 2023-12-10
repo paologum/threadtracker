@@ -15,5 +15,6 @@ router.post('/createRow/:tablename', ormRoutes.createRow)
 router.put('/resetAll', ormRoutes.reset)
 router.put('/delete/:tablename/:id', ormRoutes.delete)
 router.get('/getAll', ormRoutes.getAllRecords)
+router.put('/edit/:tablename', ormRoutes.edit)
 
 module.exports = router

@@ -32,7 +32,7 @@ const ProductRowInput: React.FC = observer(function () {
                 actions.setProductDrop(event.target.value as number);
               }}
             >
-              <MenuItem value="">
+              <MenuItem value="0">
                 <em>None</em>
               </MenuItem>
               {state.drops.map((drop, index) => (

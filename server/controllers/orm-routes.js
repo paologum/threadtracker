@@ -114,3 +114,31 @@ exports.find = (req, res) => {
             res.json({message: `Error finding row with ${props} on ${tablename}: ${err}`})
         })
 }
+exports.edit = (req, res) => {
+    const tablename = req.params.tablename;
+    const model = processTableName(tablename);
+    if (!model) {
+        res.json({message: `model: ${tablename} doesn't exist`});
+        return;
+    }
+    const info = req.body.info;
+    // brands in the frontend is stored as a yes or no value
+    if (tablename == 'brands') {
+        info.luxury = info.luxury == "Yes" ? true : false
+    }
+    console.log(info)
+    const id = req.body.id;
+    const idProp = req.body.idProp;
+    console.log(id)
+    model
+        .query()
+        .where(idProp, id)
+        .patch(info)
+        .then(() => {
+            console.log(`Updated id: ${id} with ${JSON.stringify(info)} on ${tablename}`)
+            res.json({message: `Updated id: ${id} with ${JSON.stringify(info)} on ${tablename}`})
+        })
+        .catch(err => {
+            res.json({message: `Error updating row with ${id} and ${JSON.stringify(info)} on ${tablename}`})
+        })
+}

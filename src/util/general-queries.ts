@@ -34,7 +34,6 @@ export const getAll = action("getAll", async (table: string) => {
                 setDrops(data as Drop[])
                 break;
             }
-            //TODO do drops, collaborators, etc
         }
         console.log("response: ", data);
     } catch (error) {
@@ -91,7 +90,7 @@ export const resetAll = action("resetAll", async (table: string) => {
 export const find = action("find", async (table: string, props: any) => {
     const url = new URLSearchParams(props).toString();
     try {
-        const response = await fetcher(`${requests.findBrand}/${table}?${url}`,{
+        const response = await fetcher(`${requests.find}/${table}?${url}`,{
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -102,5 +101,24 @@ export const find = action("find", async (table: string, props: any) => {
         return found;
     } catch (error) {
         console.log('Error finding brands with error: ', error);
+    }
+})
+
+export const edit = action("edit", async (table: string, idProp: string, id: string, info: any) => {
+    const body = JSON.stringify({idProp: idProp, id: id, info: info})
+    try {
+        const response = await fetcher(`${requests.edit}/${table}`,{
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+              },
+              body: body
+        });
+        const res = await response.json();
+        console.log(res);
+        await getAll(table);
+        return res;
+    } catch (error) {
+        console.log('Error editing table: ', table, ' with error: ', error);
     }
 })

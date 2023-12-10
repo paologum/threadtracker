@@ -2,6 +2,7 @@ import React from 'react';
 import './GeneralDataGrid.css'
 import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
 import { action, makeObservable, observable } from 'mobx';
+import * as generalQueries from '../util/general-queries';
 
 export class RowSelection {
   rowIDs: number[] = [];
@@ -17,13 +18,14 @@ export class RowSelection {
 }
 
 interface GeneralDataGridProps {
+  tablename: string;
   rows: any[];
   columns: GridColDef[];
   rowID: string;
 }
 
 export const rowSelection = new RowSelection();
-const GeneralDataGrid: React.FC<GeneralDataGridProps> = ({ rows, columns, rowID }) => {
+const GeneralDataGrid: React.FC<GeneralDataGridProps> = ({ tablename, rows, columns, rowID}) => {
     return (
       <div style={{ height: 400, width: '100%', color: 'light black' }}>
       <DataGrid
@@ -44,6 +46,16 @@ const GeneralDataGrid: React.FC<GeneralDataGridProps> = ({ rows, columns, rowID 
         pageSizeOptions={[5, 10]}
         checkboxSelection
         onRowSelectionModelChange={(callback, details) => rowSelection.setRowIDs(callback)}
+        processRowUpdate={(newRow, oldRow) => {
+          const { brandID, ...temp } = newRow;
+          generalQueries.edit(tablename, rowID, newRow[rowID], temp)
+          console.log(newRow)
+          return newRow
+        }}
+        onProcessRowUpdateError= {(err) => {
+          console.log(err)
+        }}
+        
         getRowId={(row) => row[rowID]}
       />
     </div>
