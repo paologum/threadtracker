@@ -1,4 +1,4 @@
-import { Button, ButtonGroup } from '@mui/material';
+import { Button, ButtonGroup, MenuItem, Select, TextField } from '@mui/material';
 import { GridColDef } from '@mui/x-data-grid';
 import { observer } from 'mobx-react' 
 import { useContext } from 'react';
@@ -11,12 +11,29 @@ const Products: React.FC= observer (function () {
     const {state, actions} = useContext(context);
     const columns: GridColDef[] = [
         { field: 'productID', headerName: 'ID', width: 20 },
-        { field: 'dropID', headerName: 'Drop ID', type: 'number', width: 80 },
-        { field: 'name', headerName: 'Product Name', width: 120 },
-        { field: 'price', headerName: 'Price', type: 'number', width: 130 },
-        { field: 'material', headerName: 'Material',  width: 130 },
-        { field: 'category', headerName: 'Category',  width: 130 },
-        { field: 'color', headerName: 'Color',  width: 130 },
+        { field: 'dropID', headerName: 'Drop ID', type: 'number', width: 80, editable: true,
+          renderEditCell: (params) => {
+            return (
+              <Select
+                value={params.value}
+                onChange={(event) => {
+                  params.api.setEditCellValue({ id: params.id, field: params.field, value: event.target.value }, event);
+                }}
+                fullWidth
+              >
+                {state.drops.map((drop) => (
+                  <MenuItem key={drop.dropID} value={drop.dropID}>
+                    {drop.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            );
+          }},
+        { field: 'name', headerName: 'Product Name', width: 120, editable: true},
+        { field: 'price', headerName: 'Price', type: 'number', width: 130, editable: true},
+        { field: 'material', headerName: 'Material',  width: 130, editable: true},
+        { field: 'category', headerName: 'Category',  width: 130, editable: true},
+        { field: 'color', headerName: 'Color',  width: 130, editable: true},
     ];
 async function add(state: State) {
     const {

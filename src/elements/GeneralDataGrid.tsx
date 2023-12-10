@@ -47,15 +47,13 @@ const GeneralDataGrid: React.FC<GeneralDataGridProps> = ({ tablename, rows, colu
         checkboxSelection
         onRowSelectionModelChange={(callback, details) => rowSelection.setRowIDs(callback)}
         processRowUpdate={(newRow, oldRow) => {
-          const { brandID, ...temp } = newRow;
-          generalQueries.edit(tablename, rowID, newRow[rowID], temp)
+          generalQueries.edit(tablename, rowID, newRow[rowID], newRow)
           console.log(newRow)
           return newRow
         }}
         onProcessRowUpdateError= {(err) => {
           console.log(err)
         }}
-        
         getRowId={(row) => row[rowID]}
       />
     </div>

@@ -16,7 +16,7 @@ export const getAll = action("getAll", async (table: string) => {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         switch(table){
             case "brands": {
                 let content = data as Brand[];
@@ -35,7 +35,7 @@ export const getAll = action("getAll", async (table: string) => {
                 break;
             }
         }
-        console.log("response: ", data);
+        // console.log("response: ", data);
     } catch (error) {
         console.log("Error getting all with error: ", error)
 
@@ -115,7 +115,6 @@ export const edit = action("edit", async (table: string, idProp: string, id: str
               body: body
         });
         const res = await response.json();
-        console.log(res);
         await getAll(table);
         return res;
     } catch (error) {

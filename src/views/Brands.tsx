@@ -10,11 +10,29 @@ import { GridCellEditStopParams, GridColDef } from '@mui/x-data-grid';
 import * as generalQueries from '../util/general-queries';
 import { State } from '../util/state';
 import { editingStateInitializer } from '@mui/x-data-grid/internals';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers';
 const columns: GridColDef[] = [
   { field: 'brandID', headerName: 'ID', width: 70 },
   { field: 'name', headerName: 'Brand Name', width: 130 , editable: true},
   { field: 'creator', headerName: 'Brand Creator', width: 130 , editable: true},
-  { field: 'year', headerName: 'Founded', width: 120 , editable: true},
+  { field: 'year', headerName: 'Founded', width: 120 , editable: true,
+          renderEditCell: (params) => {
+              return (
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  value={dayjs(params.value)}
+                  views={['year']}
+                  onChange={(newValue) => {
+                    const formattedDate = newValue ? dayjs(newValue).format('YYYY') : '';
+                    params.api.setEditCellValue({ id: params.id, field: params.field, value: formattedDate });
+                    params.api.stopCellEditMode({ id: params.id, field: params.field });
+                  }}
+                />
+              </LocalizationProvider>
+              );
+          }},
   { field: 'luxury', headerName: 'Luxury?', width: 130, editable: true},
   { field: 'rating', headerName: 'Rating', type: 'number', width: 60 , editable: true},
 ];
