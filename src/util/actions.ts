@@ -95,5 +95,13 @@ export const setMaxPrice = action("setMaxPrice", (value: number) => {
 })
 export const setRange = action("setRange", (value: number[]) => {
     state.range = value
-    getProductFilter(state.range[0] as any as string, state.range[1] as any as string)
+    getProductFilter(state.range[0] as any as string, state.range[1] as any as string, state.productNameFilter, state.productColorFilter)
+})
+export const setProductNameFilter = action("setProductNameFilter", (value: string) => {
+    state.productNameFilter = value
+    getProductFilter(state.range[0] as any as string, state.range[1] as any as string, state.productNameFilter, state.productColorFilter)
+})
+export const setProductColorFilter = action("setProductColorFilter", (value: string) => {
+    state.productColorFilter = value
+    getProductFilter(state.range[0] as any as string, state.range[1] as any as string, state.productNameFilter, state.productColorFilter)
 })

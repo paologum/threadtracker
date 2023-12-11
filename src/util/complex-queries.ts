@@ -24,9 +24,9 @@ export const getBrandSummary = action("getBrandSummary", async () => {
 
     }
 });
-export const getProductFilter = action("getProductFilter", async (min: string, max: string) => {
+export const getProductFilter = action("getProductFilter", async (min: string, max: string, name: string, color: string) => {
     try {
-        const url = new URLSearchParams({min: min, max: max}).toString();
+        const url = new URLSearchParams({min: min, max: max, name: name, color: color}).toString();
         const response = await fetcher(`${requests.getProductFilter}?${url}`, {
             method: 'GET',
             headers: {

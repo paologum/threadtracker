@@ -1,4 +1,4 @@
-import { Slider } from "@mui/material";
+import { Box, Grid, Slider, TextField, Typography } from "@mui/material";
 import { observer } from "mobx-react";
 import { useContext } from "react";
 import { context } from "../util";
@@ -7,6 +7,33 @@ const ProductFilter: React.FC = observer(function () {
     const {state, actions} = useContext(context);
     return (
     <div>
+        <Typography variant="h6" gutterBottom>
+          Product Filters
+      </Typography>
+      <Box width="75%" margin="auto">
+      <Grid container spacing={4} alignItems="center">
+          <Grid item>
+          <TextField
+            label="Product Name"
+            defaultValue={state.productNameFilter}
+            onChange={(e) => {
+              actions.setProductNameFilter(e.target.value);
+            }}
+          />
+          </Grid>
+        <Grid item>
+          <TextField
+            label="Product Color"
+            defaultValue={state.productColorFilter}
+            onChange={(e) => {
+              actions.setProductColorFilter(e.target.value);
+            }}
+          />
+          </Grid>
+          </Grid>
+        <Typography variant="h6" gutterBottom>
+        Price Range
+      </Typography>
         <Slider
         getAriaLabel={() => 'Temperature range'}
         value={state.range}
@@ -30,6 +57,7 @@ const ProductFilter: React.FC = observer(function () {
             return `$${value}`
         }}
         />
+        </Box>
     </div>
     )
 });

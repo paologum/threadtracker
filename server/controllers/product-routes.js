@@ -36,10 +36,14 @@ exports.findRange = (req, res) => {
 exports.getProductFilter = (req, res) => {
     const min = req.query.min
     const max = req.query.max
+    const name = req.query.name
+    const color = req.query.color
     models.Product
         .query()
         .where('price', '>=', min)
         .where('price', '<=', max)
+        .where('color', 'LIKE', `%${color}%`)
+        .where('name', 'LIKE', `%${name}%`)
         .then(result => {
             if (result)  {
                 res.json(result)
