@@ -4,6 +4,7 @@ import { Brand, Drop, Product } from "../../shared/types";
 import { fetcher, setBrands, setDrops, setProducts } from "./actions";
 import requests from "./constants";
 import * as complexQueries from './complex-queries';
+import { actions } from ".";
 
 export const getAll = action("getAll", async (table: string) => {
     try {
@@ -30,6 +31,7 @@ export const getAll = action("getAll", async (table: string) => {
             }
             case "products": {
                 setProducts(data as Product[])
+                findRange()
                 break;
             }
             case "drops": {
@@ -122,5 +124,21 @@ export const edit = action("edit", async (table: string, idProp: string, id: str
         return res;
     } catch (error) {
         console.log('Error editing table: ', table, ' with error: ', error);
+    }
+})
+export const findRange = action("findRange", async () => {
+    try {
+        const response = await fetcher(`${requests.findRange}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+              },
+        });
+        const res = await response.json();
+        actions.setMinPrice(res.minPrice);
+        actions.setMaxPrice(res.maxPrice);
+        console.log("response: ", res);
+    } catch (error) {
+        console.log("Error deleting row with error: ", error)
     }
 })

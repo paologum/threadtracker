@@ -10,6 +10,8 @@ export type State =  {
     productInput: ProductInputState;
     dropInput: DropInputState;
     brandSummaries: BrandSummaries[];
+    minPrice: number;
+    maxPrice: number;
 }
 
 export const state = observable<State>( {
@@ -38,5 +40,7 @@ export const state = observable<State>( {
         season: "",
     },
     brandSummaries: [],
+    minPrice: 0,
+    maxPrice: 0
 },
 )

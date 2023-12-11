@@ -15,6 +15,7 @@ const Home: React.FC= observer (function () {
     ];
     return (
       <div style={{ height: 400, width: '100%', color: 'light black' }}>
+        <div style={{ fontWeight: 1000, lineHeight: 1.5, color: 'light black' }} > Brand Summaries</div>
       <DataGrid
         rows={state.brandSummaries}
         columns={columns}
@@ -27,7 +28,7 @@ const Home: React.FC= observer (function () {
         }}}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
+            paginationModel: { page: 0, pageSize: 10 },
           },
         }}
         pageSizeOptions={[5, 10]}

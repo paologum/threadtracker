@@ -18,5 +18,6 @@ router.put('/delete/:tablename/:id', ormRoutes.delete)
 router.get('/getAll', ormRoutes.getAllRecords)
 router.put('/edit/:tablename', ormRoutes.edit)
 router.get('/getBrandSummary', complexRoutes.getBrandSummary)
+router.get('/findRange', productRoutes.findRange)
 
 module.exports = router

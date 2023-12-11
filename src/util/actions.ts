@@ -86,3 +86,9 @@ export const setDropSeason= action("setDropBrand", (value: string) => {
 export const setBrandSummaries = action("setBrandSummaries", (value: BrandSummaries[]) => {
     state.brandSummaries = value;
 })
+export const setMinPrice = action("setMinPrice", (value: number) => {
+    state.minPrice = value
+})
+export const setMaxPrice = action("setMaxPrice", (value: number) => {
+    state.maxPrice = value
+})
