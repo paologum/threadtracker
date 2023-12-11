@@ -93,15 +93,26 @@ export const setMinPrice = action("setMinPrice", (value: number) => {
 export const setMaxPrice = action("setMaxPrice", (value: number) => {
     state.maxPrice = value
 })
+export const setProductCategoryList = action("setProductCategoryList", (value: string[]) => {
+    state.productCategoryList = value
+})
 export const setRange = action("setRange", (value: number[]) => {
     state.range = value
-    getProductFilter(state.range[0] as any as string, state.range[1] as any as string, state.productNameFilter, state.productColorFilter)
+    getProductFilter(state.range[0] as any as string, state.range[1] as any as string, state.productNameFilter, state.productColorFilter, state.productCategoryFilter, state.productMaterialFilter)
 })
 export const setProductNameFilter = action("setProductNameFilter", (value: string) => {
     state.productNameFilter = value
-    getProductFilter(state.range[0] as any as string, state.range[1] as any as string, state.productNameFilter, state.productColorFilter)
+    getProductFilter(state.range[0] as any as string, state.range[1] as any as string, state.productNameFilter, state.productColorFilter, state.productCategoryFilter, state.productMaterialFilter)
 })
 export const setProductColorFilter = action("setProductColorFilter", (value: string) => {
     state.productColorFilter = value
-    getProductFilter(state.range[0] as any as string, state.range[1] as any as string, state.productNameFilter, state.productColorFilter)
+    getProductFilter(state.range[0] as any as string, state.range[1] as any as string, state.productNameFilter, state.productColorFilter, state.productCategoryFilter, state.productMaterialFilter)
+})
+export const setProductCategoryFilter = action("setProductCategoryFilter", (value: string) => {
+    state.productCategoryFilter = value
+    getProductFilter(state.range[0] as any as string, state.range[1] as any as string, state.productNameFilter, state.productColorFilter, state.productCategoryFilter, state.productMaterialFilter)
+})
+export const setProductMaterialFilter = action("setProductMaterialFilter", (value: string) => {
+    state.productMaterialFilter = value
+    getProductFilter(state.range[0] as any as string, state.range[1] as any as string, state.productNameFilter, state.productColorFilter, state.productCategoryFilter, state.productMaterialFilter)
 })

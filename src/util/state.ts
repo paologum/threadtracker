@@ -15,6 +15,9 @@ export type State =  {
     range: number[];
     productNameFilter: string;
     productColorFilter: string;
+    productCategoryFilter: string;
+    productMaterialFilter: string;
+    productCategoryList: string[];
 }
 
 export const state = observable<State>( {
@@ -47,6 +50,9 @@ export const state = observable<State>( {
     maxPrice: 0,
     range: [0, 0],
     productNameFilter: "",
-    productColorFilter: ""
+    productColorFilter: "",
+    productCategoryFilter: "",
+    productMaterialFilter: "",
+    productCategoryList: [],
 },
 )

@@ -14,7 +14,7 @@ exports.getBrandSummary = async (req, res) => {
         .select('brandID', 'name')
         .withGraphFetched('drops.[products]')
         .then(summary => {
-            console.log(summary)
+            // console.log(summary)
             summary = summary.map(brand => {
                 let totalProducts = 0;
                 let totalProductPrice = 0;
@@ -30,7 +30,7 @@ exports.getBrandSummary = async (req, res) => {
                 brand['total_drops'] = brand.drops.length;
                 return brand
             })
-            console.log(summary)
+            // console.log(summary)
             res.json(summary);
         })
         .catch(err => {

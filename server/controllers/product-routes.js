@@ -2,6 +2,23 @@
 const knex = require('../db');
 const models = require('../models')
 
+exports.findCategories = (req, res) => {
+    let final = []
+    models.Product
+        .query()
+        .select('category')
+        .distinct('category')
+        .then(result => {
+            if (result) {
+                const categories = result.map(product => product.category);
+                res.json(categories);
+            }
+        })
+        .catch(err => {
+        // Send a error message in response
+            res.json({ message: `There was an error reseting ${tablename}: ${err}` })
+    })
+}
 exports.findRange = (req, res) => {
     let final = {minPrice: 0, maxPrice: 0}
     models.Product
@@ -38,12 +55,16 @@ exports.getProductFilter = (req, res) => {
     const max = req.query.max
     const name = req.query.name
     const color = req.query.color
+    const category = req.query.category
+    const material = req.query.material
     models.Product
         .query()
         .where('price', '>=', min)
         .where('price', '<=', max)
         .where('color', 'LIKE', `%${color}%`)
         .where('name', 'LIKE', `%${name}%`)
+        .where('category', 'LIKE', `%${category}%`)
+        .where('material', 'LIKE', `%${material}%`)
         .then(result => {
             if (result)  {
                 res.json(result)

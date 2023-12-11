@@ -12,5 +12,6 @@ const requests = {
     brandSummary: router + '/getBrandSummary',
     findRange: router + '/findRange',
     getProductFilter: router + '/getProductFilter',
+    findCategories: router + '/findCategories',
 }
 export default requests;

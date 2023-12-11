@@ -32,6 +32,7 @@ export const getAll = action("getAll", async (table: string) => {
             case "products": {
                 setProducts(data as Product[])
                 findRange()
+                findCategories()
                 break;
             }
             case "drops": {
@@ -139,6 +140,21 @@ export const findRange = action("findRange", async () => {
         actions.setMaxPrice(res.maxPrice);
         actions.setRange([res.minPrice, res.maxPrice])
         // console.log("response: ", res);
+    } catch (error) {
+        console.log("Error deleting row with error: ", error)
+    }
+})
+export const findCategories = action("findCategories", async () => {
+    try {
+        const response = await fetcher(`${requests.findCategories}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+              },
+        });
+        const res = await response.json();
+        actions.setProductCategoryList(res)
+        console.log("response: ", res);
     } catch (error) {
         console.log("Error deleting row with error: ", error)
     }

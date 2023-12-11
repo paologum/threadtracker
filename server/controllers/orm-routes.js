@@ -126,16 +126,16 @@ exports.edit = (req, res) => {
     if (tablename == 'brands') {
         info.luxury = info.luxury == "Yes" ? true : false
     }
-    console.log(info)
+    // console.log(info)
     const id = req.body.id;
     const idProp = req.body.idProp;
-    console.log(id)
+    // console.log(id)
     model
         .query()
         .where(idProp, id)
         .patch(info)
         .then(() => {
-            console.log(`Updated id: ${id} with ${JSON.stringify(info)} on ${tablename}`)
+            // console.log(`Updated id: ${id} with ${JSON.stringify(info)} on ${tablename}`)
             res.json({message: `Updated id: ${id} with ${JSON.stringify(info)} on ${tablename}`})
         })
         .catch(err => {

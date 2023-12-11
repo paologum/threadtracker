@@ -1,4 +1,4 @@
-import { Box, Grid, Slider, TextField, Typography } from "@mui/material";
+import { Box, FormControl, Grid, InputLabel, MenuItem, Select, Slider, TextField, Typography } from "@mui/material";
 import { observer } from "mobx-react";
 import { useContext } from "react";
 import { context } from "../util";
@@ -27,6 +27,39 @@ const ProductFilter: React.FC = observer(function () {
             defaultValue={state.productColorFilter}
             onChange={(e) => {
               actions.setProductColorFilter(e.target.value);
+            }}
+          />
+          </Grid>
+        <Grid item>
+          <FormControl sx={{ m: 1, minWidth: 200 }} size="medium">
+            <InputLabel htmlFor="uncontrolled-native">Category</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-small"
+              value={state.productCategoryFilter}
+              label="Category"
+              onChange={(event) => {
+                actions.setProductCategoryFilter(event.target.value)
+              }}
+            >
+              <MenuItem value="">
+                None
+              </MenuItem>
+              {state.productCategoryList.map((category, index) => (
+                  <MenuItem key={index}value={category}>
+                    {category}
+                  </MenuItem>
+                )
+              )}
+            </Select>
+          </FormControl>
+          </Grid>
+        <Grid item>
+          <TextField
+            label="Product Material"
+            defaultValue={state.productMaterialFilter}
+            onChange={(e) => {
+              actions.setProductMaterialFilter(e.target.value);
             }}
           />
           </Grid>
