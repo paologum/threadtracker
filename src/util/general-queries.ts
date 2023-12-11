@@ -1,7 +1,9 @@
 import { action } from "mobx";
+import { Routes } from "react-router";
 import { Brand, Drop, Product } from "../../shared/types";
 import { fetcher, setBrands, setDrops, setProducts } from "./actions";
 import requests from "./constants";
+import * as complexQueries from './complex-queries';
 
 export const getAll = action("getAll", async (table: string) => {
     try {
@@ -35,6 +37,7 @@ export const getAll = action("getAll", async (table: string) => {
                 break;
             }
         }
+        complexQueries.getBrandSummary();
         // console.log("response: ", data);
     } catch (error) {
         console.log("Error getting all with error: ", error)

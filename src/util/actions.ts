@@ -2,6 +2,7 @@ import { action } from 'mobx'
 import { state } from './state'
 import { Brand, Drop, Product } from '../../shared/types' 
 import { Dayjs } from 'dayjs';
+import { BrandSummaries } from './types';
 // If you are running in dev mode, prefix URL's with the dev server URL:
 
 const devurl = "http://localhost:3000";
@@ -81,4 +82,7 @@ export const setDropDate = action("setDropDate", (value: Dayjs) => {
 })
 export const setDropSeason= action("setDropBrand", (value: string) => {
     state.dropInput.season=value;
+})
+export const setBrandSummaries = action("setBrandSummaries", (value: BrandSummaries[]) => {
+    state.brandSummaries = value;
 })

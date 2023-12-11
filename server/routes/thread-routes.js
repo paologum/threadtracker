@@ -4,6 +4,7 @@ const brandRoutes = require('./../controllers/brand-routes.js')
 const productRoutes = require('./../controllers/product-routes.js')
 const generalRoutes = require('./../controllers/general-routes.js')
 const ormRoutes = require('./../controllers/orm-routes.js');
+const complexRoutes = require('./../controllers/complex-routes')
 
 const router = express.Router()
 
@@ -16,5 +17,6 @@ router.put('/resetAll', ormRoutes.reset)
 router.put('/delete/:tablename/:id', ormRoutes.delete)
 router.get('/getAll', ormRoutes.getAllRecords)
 router.put('/edit/:tablename', ormRoutes.edit)
+router.get('/getBrandSummary', complexRoutes.getBrandSummary)
 
 module.exports = router

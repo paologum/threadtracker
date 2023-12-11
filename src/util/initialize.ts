@@ -1,4 +1,5 @@
 import * as generalQueries from '../util/general-queries';
+import * as complexQueries from '../util/complex-queries';
 
 export async function initialize() {
     // If we're running in dev mode (yarn dev), then the app is not served from the same URL
@@ -7,6 +8,7 @@ export async function initialize() {
       generalQueries.getAll('brands');
       generalQueries.getAll('products');
       generalQueries.getAll('drops');
+      complexQueries.getBrandSummary();
       console.log('Brands loaded');
     } catch(e: any) {
       console.log('FAILED to retrieve presets.  Error was: ', e);

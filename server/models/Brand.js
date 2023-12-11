@@ -8,14 +8,6 @@ class Brand extends Model {
     const Product = require('./Product'); // Require the related model here to avoid require loops
     const Drop = require('./Drop');
     return {
-      products: {
-        relation: Model.HasManyRelation,
-        modelClass: Product,
-        join: {
-          from: 'brands.brandID',
-          to: 'products.brandID'
-        }
-      },
       drops: {
         relation: Model.HasManyRelation,
         modelClass: Drop,

@@ -29,6 +29,13 @@ export interface DropInputState {
   date: string,
   season: string,
 }
+export interface BrandSummaries {
+  brandID: number,
+  name: string,
+  total_products: number,
+  average_price: number,
+  total_drops: number  
+}
 export class ErrorType {
   error=false;
   text="";

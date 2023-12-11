@@ -9,5 +9,6 @@ const requests = {
     createRow: router + '/createRow',
     delete: router + '/delete',
     edit: router + '/edit',
+    brandSummary: router + '/getBrandSummary',
 }
 export default requests;

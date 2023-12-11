@@ -1,7 +1,7 @@
 import dayjs, { Dayjs } from 'dayjs';
 import { observable } from 'mobx';
 import { Brand, Product, Drop } from '../../shared/types';
-import { BrandInputState, DropInputState, ProductInputState } from './types';
+import { BrandInputState, BrandSummaries, DropInputState, ProductInputState } from './types';
 export type State =  {
     brands: Brand[];
     products: Product[];
@@ -9,6 +9,7 @@ export type State =  {
     brandInput: BrandInputState;
     productInput: ProductInputState;
     dropInput: DropInputState;
+    brandSummaries: BrandSummaries[];
 }
 
 export const state = observable<State>( {
@@ -35,6 +36,7 @@ export const state = observable<State>( {
         name: "",
         date: dayjs().format('MM/DD/YYYY'),
         season: "",
-        }
+    },
+    brandSummaries: [],
 },
 )
