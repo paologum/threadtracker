@@ -24,3 +24,23 @@ export const getBrandSummary = action("getBrandSummary", async () => {
 
     }
 });
+export const getProductFilter = action("getProductFilter", async (min: string, max: string) => {
+    try {
+        const url = new URLSearchParams({min: min, max: max}).toString();
+        const response = await fetcher(`${requests.getProductFilter}?${url}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+              },
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+        actions.setProducts(data as Product[])
+    } catch (error) {
+        console.log("Error getting all with error: ", error)
+
+    }
+});

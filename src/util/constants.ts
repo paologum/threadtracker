@@ -10,6 +10,7 @@ const requests = {
     delete: router + '/delete',
     edit: router + '/edit',
     brandSummary: router + '/getBrandSummary',
-    findRange: router + '/findRange'
+    findRange: router + '/findRange',
+    getProductFilter: router + '/getProductFilter',
 }
 export default requests;

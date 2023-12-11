@@ -19,5 +19,6 @@ router.get('/getAll', ormRoutes.getAllRecords)
 router.put('/edit/:tablename', ormRoutes.edit)
 router.get('/getBrandSummary', complexRoutes.getBrandSummary)
 router.get('/findRange', productRoutes.findRange)
+router.get('/getProductFilter', productRoutes.getProductFilter)
 
 module.exports = router

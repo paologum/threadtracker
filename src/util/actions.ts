@@ -3,6 +3,7 @@ import { state } from './state'
 import { Brand, Drop, Product } from '../../shared/types' 
 import { Dayjs } from 'dayjs';
 import { BrandSummaries } from './types';
+import { getProductFilter } from './complex-queries';
 // If you are running in dev mode, prefix URL's with the dev server URL:
 
 const devurl = "http://localhost:3000";
@@ -91,4 +92,8 @@ export const setMinPrice = action("setMinPrice", (value: number) => {
 })
 export const setMaxPrice = action("setMaxPrice", (value: number) => {
     state.maxPrice = value
+})
+export const setRange = action("setRange", (value: number[]) => {
+    state.range = value
+    getProductFilter(state.range[0] as any as string, state.range[1] as any as string)
 })

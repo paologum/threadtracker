@@ -12,6 +12,7 @@ export type State =  {
     brandSummaries: BrandSummaries[];
     minPrice: number;
     maxPrice: number;
+    range: number[];
 }
 
 export const state = observable<State>( {
@@ -41,6 +42,7 @@ export const state = observable<State>( {
     },
     brandSummaries: [],
     minPrice: 0,
-    maxPrice: 0
+    maxPrice: 0,
+    range: [0, 0]
 },
 )

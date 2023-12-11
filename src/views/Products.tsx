@@ -7,6 +7,7 @@ import { context } from '../util/index';
 import ProductRowInput, { error } from '../elements/ProductRowInput';
 import * as generalQueries from '../util/general-queries';
 import { State } from '../util/state';
+import ProductFilter from '../elements/ProductFilter';
 const Products: React.FC= observer (function () {
     const {state, actions} = useContext(context);
     const columns: GridColDef[] = [
@@ -87,6 +88,7 @@ async function add(state: State) {
     return (
         <div>
             <ProductRowInput/>
+            <ProductFilter/>
             <div className="centered-container">
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     <Button variant="contained" onClick={async ()=> {

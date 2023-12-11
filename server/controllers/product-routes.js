@@ -33,3 +33,20 @@ exports.findRange = (req, res) => {
             res.json({ message: `There was an error reseting ${tablename}: ${err}` })
     })
 }
+exports.getProductFilter = (req, res) => {
+    const min = req.query.min
+    const max = req.query.max
+    models.Product
+        .query()
+        .where('price', '>=', min)
+        .where('price', '<=', max)
+        .then(result => {
+            if (result)  {
+                res.json(result)
+            }
+        })
+        .catch(err => {
+        // Send a error message in response
+            res.json({ message: `There was an error reseting ${tablename}: ${err}` })
+    })
+}

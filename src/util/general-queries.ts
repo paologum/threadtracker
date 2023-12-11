@@ -137,7 +137,8 @@ export const findRange = action("findRange", async () => {
         const res = await response.json();
         actions.setMinPrice(res.minPrice);
         actions.setMaxPrice(res.maxPrice);
-        console.log("response: ", res);
+        actions.setRange([res.minPrice, res.maxPrice])
+        // console.log("response: ", res);
     } catch (error) {
         console.log("Error deleting row with error: ", error)
     }
